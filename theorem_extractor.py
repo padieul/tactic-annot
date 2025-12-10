@@ -21,7 +21,7 @@ class TheoremExtractor:
     # Keywords that indicate we should stop collecting lines
     STOP_KEYWORDS = (
         'theorem ', 'lemma ', 'def ', 'instance ', 'axiom ', 'example ',
-        'end ', 'section ', 'namespace ', '@[', '/-', '/--'
+        'end', 'section ', 'namespace ', '@[', '/-', '/--', 'protected '
     )
     
     def __init__(self, rename_suffix: str = "_test"):
@@ -71,6 +71,39 @@ class TheoremExtractor:
         """Check if a line starts a theorem declaration."""
         return any(line.startswith(keyword) for keyword in self.DECLARATION_KEYWORDS)
     
+    def _collect_preceding_annotations(self, lines: List[str], theorem_idx: int) -> List[str]:
+        """
+        Collect any @[...] annotations that appear before the theorem.
+        
+        Args:
+            lines: All lines of the file
+            theorem_idx: Index where theorem declaration starts
+            
+        Returns:
+            List of lines containing annotations (in order)
+        """
+        annotation_lines = []
+        j = theorem_idx - 1
+        
+        # Look backwards for annotations
+        while j >= 0:
+            line = lines[j].strip()
+            
+            # Stop if we hit an empty line or non-annotation content
+            if line == '':
+                j -= 1
+                continue
+            
+            # If it's an attribute annotation, include it
+            if line.startswith('@['):
+                annotation_lines.insert(0, lines[j])
+                j -= 1
+            else:
+                # Stop if we hit something that's not an annotation
+                break
+        
+        return annotation_lines
+    
     def _extract_theorem(self, lines: List[str], start_idx: int) -> Dict[str, any]:
         """
         Extract a single theorem starting at the given line.
@@ -90,7 +123,12 @@ class TheoremExtractor:
             return None
         
         name = name_match.group(1)
-        theorem_lines = [lines[start_idx]]
+        
+        # Collect any preceding annotations
+        annotation_lines = self._collect_preceding_annotations(lines, start_idx)
+        
+        # Start with annotations, then the theorem declaration
+        theorem_lines = annotation_lines + [lines[start_idx]]
         
         # Collect lines until we find the end
         j = start_idx + 1
@@ -115,7 +153,7 @@ class TheoremExtractor:
             'renamed': new_name,
             'full_text': full_text,
             'full_text_renamed': full_text_renamed,
-            'line_number': start_idx + 1,
+            'line_number': start_idx + 1,  # Still report the theorem declaration line
             '_end_line': j  # Internal use for iteration
         }
     

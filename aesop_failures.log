@@ -1,0 +1,1175 @@
+AESOP FAILURES LOG
+Generated: 2025-12-10 12:32:23
+================================================================================
+
+Total failures: 42
+
+================================================================================
+FAILURE #1: eval₂_eq_sum
+================================================================================
+Line number: 74
+Has @[simp]: False
+Failure reason: SnippetStatus.lean_error
+Context: semiring_s
+
+Original theorem signature:
+--------------------------------------------------------------------------------
+theorem eval₂_eq_sum {f : R →+* S} {x : S} : p.eval₂ f x = p.sum fun e a => f a * x ^ e
+--------------------------------------------------------------------------------
+
+Error details:
+--------------------------------------------------------------------------------
+tactic 'aesop' failed, made no progress
+Initial goal:
+  R : Type u_1
+  S : Type u_2
+  inst✝¹ : Semiring R
+  p : R[X]
+  inst✝ : Semiring S
+  f : R →+* S
+  x : S
+  ⊢ eval₂ f x p = p.sum fun e a => f a * x ^ e
+--------------------------------------------------------------------------------
+
+
+================================================================================
+FAILURE #2: eval₂_sum
+================================================================================
+Line number: 133
+Has @[simp]: False
+Failure reason: SnippetStatus.lean_error
+Context: semiring_s
+
+Original theorem signature:
+--------------------------------------------------------------------------------
+theorem eval₂_sum (p : T[X]) (g : Nat → T → R[X]) (x : S) :
+    (p.sum g).eval₂ f x = p.sum fun n a => (g n a).eval₂ f x
+--------------------------------------------------------------------------------
+
+Error details:
+--------------------------------------------------------------------------------
+tactic 'aesop' failed, made no progress
+Initial goal:
+  R : Type u_1
+  S : Type u_2
+  T : Type u_3
+  inst✝² : Semiring R
+  inst✝¹ : Semiring S
+  f : R →+* S
+  inst✝ : Semiring T
+  p : T[X]
+  g : ℕ → T → R[X]
+  x : S
+  ⊢ eval₂ f x (p.sum g) = p.sum fun n a => eval₂ f x (g n a)
+--------------------------------------------------------------------------------
+
+
+================================================================================
+FAILURE #3: eval₂_list_sum
+================================================================================
+Line number: 143
+Has @[simp]: False
+Failure reason: SnippetStatus.lean_error
+Context: semiring_s
+
+Original theorem signature:
+--------------------------------------------------------------------------------
+theorem eval₂_list_sum (l : List R[X]) (x : S) : eval₂ f x l.sum = (l.map (eval₂ f x)).sum
+--------------------------------------------------------------------------------
+
+Error details:
+--------------------------------------------------------------------------------
+tactic 'aesop' failed, made no progress
+Initial goal:
+  R : Type u_1
+  S : Type u_2
+  inst✝¹ : Semiring R
+  inst✝ : Semiring S
+  f : R →+* S
+  l : List R[X]
+  x : S
+  ⊢ eval₂ f x l.sum = (List.map (eval₂ f x) l).sum
+--------------------------------------------------------------------------------
+
+
+================================================================================
+FAILURE #4: eval₂_multiset_sum
+================================================================================
+Line number: 146
+Has @[simp]: False
+Failure reason: SnippetStatus.lean_error
+Context: semiring_s
+
+Original theorem signature:
+--------------------------------------------------------------------------------
+theorem eval₂_multiset_sum (s : Multiset R[X]) (x : S) :
+    eval₂ f x s.sum = (s.map (eval₂ f x)).sum
+--------------------------------------------------------------------------------
+
+Error details:
+--------------------------------------------------------------------------------
+tactic 'aesop' failed, made no progress
+Initial goal:
+  R : Type u_1
+  S : Type u_2
+  inst✝¹ : Semiring R
+  inst✝ : Semiring S
+  f : R →+* S
+  s : Multiset R[X]
+  x : S
+  ⊢ eval₂ f x s.sum = (Multiset.map (eval₂ f x) s).sum
+--------------------------------------------------------------------------------
+
+
+================================================================================
+FAILURE #5: eval₂_finset_sum
+================================================================================
+Line number: 150
+Has @[simp]: False
+Failure reason: SnippetStatus.lean_error
+Context: semiring_s
+
+Original theorem signature:
+--------------------------------------------------------------------------------
+theorem eval₂_finset_sum (s : Finset ι) (g : ι → R[X]) (x : S) :
+    (∑ i ∈ s, g i).eval₂ f x = ∑ i ∈ s, (g i).eval₂ f x
+--------------------------------------------------------------------------------
+
+Error details:
+--------------------------------------------------------------------------------
+tactic 'aesop' failed, made no progress
+Initial goal:
+  R : Type u_1
+  S : Type u_2
+  ι : Type u_4
+  inst✝¹ : Semiring R
+  inst✝ : Semiring S
+  f : R →+* S
+  s : Finset ι
+  g : ι → R[X]
+  x : S
+  ⊢ eval₂ f x (∑ i ∈ s, g i) = ∑ i ∈ s, eval₂ f x (g i)
+--------------------------------------------------------------------------------
+
+
+================================================================================
+FAILURE #6: eval₂_ofFinsupp
+================================================================================
+Line number: 154
+Has @[simp]: False
+Failure reason: SnippetStatus.lean_error
+Context: semiring_s
+
+Original theorem signature:
+--------------------------------------------------------------------------------
+theorem eval₂_ofFinsupp {f : R →+* S} {x : S} {p : R[Nat]} :
+    eval₂ f x (⟨p⟩ : R[X]) = liftNC (↑f) (powersHom S x) p
+--------------------------------------------------------------------------------
+
+Error details:
+--------------------------------------------------------------------------------
+tactic 'aesop' failed, made no progress
+Initial goal:
+  R : Type u_1
+  S : Type u_2
+  inst✝¹ : Semiring R
+  inst✝ : Semiring S
+  f : R →+* S
+  x : S
+  p : R[ℕ]
+  ⊢ eval₂ f x { toFinsupp := p } = (liftNC ↑f ⇑((powersHom S) x)) p
+--------------------------------------------------------------------------------
+
+
+================================================================================
+FAILURE #7: eval₂_mul_noncomm
+================================================================================
+Line number: 159
+Has @[simp]: False
+Failure reason: SnippetStatus.lean_error
+Context: semiring_s
+
+Original theorem signature:
+--------------------------------------------------------------------------------
+theorem eval₂_mul_noncomm (hf : ∀ k, Commute (f <| q.coeff k) x) :
+    eval₂ f x (p * q) = eval₂ f x p * eval₂ f x q
+--------------------------------------------------------------------------------
+
+Error details:
+--------------------------------------------------------------------------------
+tactic 'aesop' failed, made no progress
+Initial goal:
+  R : Type u_1
+  S : Type u_2
+  inst✝¹ : Semiring R
+  p q : R[X]
+  inst✝ : Semiring S
+  f : R →+* S
+  x : S
+  hf : ∀ (k : ℕ), Commute (f (q.coeff k)) x
+  ⊢ eval₂ f x (p * q) = eval₂ f x p * eval₂ f x q
+--------------------------------------------------------------------------------
+
+
+================================================================================
+FAILURE #8: eval₂_mul_C
+================================================================================
+Line number: 176
+Has @[simp]: False
+Failure reason: SnippetStatus.lean_error
+Context: semiring_s
+
+Original theorem signature:
+--------------------------------------------------------------------------------
+theorem eval₂_mul_C' (h : Commute (f a) x) : eval₂ f x (p * C a) = eval₂ f x p * f a
+--------------------------------------------------------------------------------
+
+Error details:
+--------------------------------------------------------------------------------
+tactic 'aesop' failed, made no progress
+Initial goal:
+  R : Type u_1
+  S : Type u_2
+  a : R
+  inst✝¹ : Semiring R
+  p : R[X]
+  inst✝ : Semiring S
+  f : R →+* S
+  x : S
+  h : Commute (f a) x
+  ⊢ eval₂ f x (p * C a) = eval₂ f x p * f a
+--------------------------------------------------------------------------------
+
+
+================================================================================
+FAILURE #9: eval₂_list_prod_noncomm
+================================================================================
+Line number: 183
+Has @[simp]: False
+Failure reason: SnippetStatus.lean_error
+Context: semiring_s
+
+Original theorem signature:
+--------------------------------------------------------------------------------
+theorem eval₂_list_prod_noncomm (ps : List R[X])
+    (hf : ∀ p ∈ ps, ∀ (k), Commute (f <| coeff p k) x) :
+    eval₂ f x ps.prod = (ps.map (Polynomial.eval₂ f x)).prod
+--------------------------------------------------------------------------------
+
+Error details:
+--------------------------------------------------------------------------------
+tactic 'aesop' failed, made no progress
+Initial goal:
+  R : Type u_1
+  S : Type u_2
+  inst✝¹ : Semiring R
+  inst✝ : Semiring S
+  f : R →+* S
+  x : S
+  ps : List R[X]
+  hf : ∀ p ∈ ps, ∀ (k : ℕ), Commute (f (p.coeff k)) x
+  ⊢ eval₂ f x ps.prod = (List.map (eval₂ f x) ps).prod
+--------------------------------------------------------------------------------
+
+
+================================================================================
+FAILURE #10: eval₂_pow
+================================================================================
+Line number: 238
+Has @[simp]: False
+Failure reason: SnippetStatus.lean_error
+Context: commsemiring_s
+
+Original theorem signature:
+--------------------------------------------------------------------------------
+theorem eval₂_pow (n : Nat) : (p ^ n).eval₂ f x = p.eval₂ f x ^ n
+--------------------------------------------------------------------------------
+
+Error details:
+--------------------------------------------------------------------------------
+tactic 'aesop' failed, made no progress
+Initial goal:
+  R : Type u_1
+  S : Type u_2
+  inst✝¹ : Semiring R
+  p : R[X]
+  inst✝ : CommSemiring S
+  f : R →+* S
+  x : S
+  n : ℕ
+  ⊢ eval₂ f x (p ^ n) = eval₂ f x p ^ n
+--------------------------------------------------------------------------------
+
+
+================================================================================
+FAILURE #11: eval₂_dvd
+================================================================================
+Line number: 242
+Has @[simp]: False
+Failure reason: SnippetStatus.lean_error
+Context: commsemiring_s
+
+Original theorem signature:
+--------------------------------------------------------------------------------
+@[gcongr]
+theorem eval₂_dvd : p ∣ q → eval₂ f x p ∣ eval₂ f x q
+--------------------------------------------------------------------------------
+
+Error details:
+--------------------------------------------------------------------------------
+unsolved goals
+R : Type u_1
+S : Type u_2
+inst : Semiring R
+p q : R[X]
+inst_1 : CommSemiring S
+f : R →+* S
+x : S
+a : p ∣ q
+⊢ eval₂ f x p ∣ eval₂ f x q
+--------------------------------------------------------------------------------
+
+
+================================================================================
+FAILURE #12: eval₂_eq_zero_of_dvd_of_eval₂_eq_zero
+================================================================================
+Line number: 245
+Has @[simp]: False
+Failure reason: SnippetStatus.lean_error
+Context: commsemiring_s
+
+Original theorem signature:
+--------------------------------------------------------------------------------
+theorem eval₂_eq_zero_of_dvd_of_eval₂_eq_zero (h : p ∣ q) (h0 : eval₂ f x p = 0) :
+    eval₂ f x q = 0
+--------------------------------------------------------------------------------
+
+Error details:
+--------------------------------------------------------------------------------
+tactic 'aesop' failed, made no progress
+Initial goal:
+  R : Type u_1
+  S : Type u_2
+  inst✝¹ : Semiring R
+  p q : R[X]
+  inst✝ : CommSemiring S
+  f : R →+* S
+  x : S
+  h : p ∣ q
+  h0 : eval₂ f x p = 0
+  ⊢ eval₂ f x q = 0
+--------------------------------------------------------------------------------
+
+
+================================================================================
+FAILURE #13: eval₂_list_prod
+================================================================================
+Line number: 249
+Has @[simp]: False
+Failure reason: SnippetStatus.lean_error
+Context: commsemiring_s
+
+Original theorem signature:
+--------------------------------------------------------------------------------
+theorem eval₂_list_prod (l : List R[X]) (x : S) : eval₂ f x l.prod = (l.map (eval₂ f x)).prod
+--------------------------------------------------------------------------------
+
+Error details:
+--------------------------------------------------------------------------------
+tactic 'aesop' failed, made no progress
+Initial goal:
+  R : Type u_1
+  S : Type u_2
+  inst✝¹ : Semiring R
+  inst✝ : CommSemiring S
+  f : R →+* S
+  l : List R[X]
+  x : S
+  ⊢ eval₂ f x l.prod = (List.map (eval₂ f x) l).prod
+--------------------------------------------------------------------------------
+
+
+================================================================================
+FAILURE #14: eval_eq_sum
+================================================================================
+Line number: 267
+Has @[simp]: False
+Failure reason: SnippetStatus.lean_error
+Context: eval_r
+
+Original theorem signature:
+--------------------------------------------------------------------------------
+theorem eval_eq_sum : p.eval x = p.sum fun e a => a * x ^ e
+--------------------------------------------------------------------------------
+
+Error details:
+--------------------------------------------------------------------------------
+tactic 'aesop' failed, made no progress
+Initial goal:
+  R : Type u_1
+  inst✝ : Semiring R
+  p : R[X]
+  x : R
+  ⊢ eval x p = p.sum fun e a => a * x ^ e
+--------------------------------------------------------------------------------
+
+
+================================================================================
+FAILURE #15: eval_listSum
+================================================================================
+Line number: 345
+Has @[simp]: False
+Failure reason: SnippetStatus.lean_error
+Context: eval_r
+
+Original theorem signature:
+--------------------------------------------------------------------------------
+theorem eval_listSum (l : List R[X]) (x : R) : eval x l.sum = (l.map (eval x)).sum
+--------------------------------------------------------------------------------
+
+Error details:
+--------------------------------------------------------------------------------
+tactic 'aesop' failed, made no progress
+Initial goal:
+  R : Type u_1
+  inst✝ : Semiring R
+  l : List R[X]
+  x : R
+  ⊢ eval x l.sum = (List.map (eval x) l).sum
+--------------------------------------------------------------------------------
+
+
+================================================================================
+FAILURE #16: eval_multisetSum
+================================================================================
+Line number: 349
+Has @[simp]: False
+Failure reason: SnippetStatus.lean_error
+Context: eval_r
+
+Original theorem signature:
+--------------------------------------------------------------------------------
+theorem eval_multisetSum (s : Multiset R[X]) (x : R) : eval x s.sum = (s.map (eval x)).sum
+--------------------------------------------------------------------------------
+
+Error details:
+--------------------------------------------------------------------------------
+tactic 'aesop' failed, made no progress
+Initial goal:
+  R : Type u_1
+  inst✝ : Semiring R
+  s : Multiset R[X]
+  x : R
+  ⊢ eval x s.sum = (Multiset.map (eval x) s).sum
+--------------------------------------------------------------------------------
+
+
+================================================================================
+FAILURE #17: eval_sum
+================================================================================
+Line number: 352
+Has @[simp]: False
+Failure reason: SnippetStatus.lean_error
+Context: eval_r
+
+Original theorem signature:
+--------------------------------------------------------------------------------
+theorem eval_sum (p : R[X]) (f : Nat → R → R[X]) (x : R) :
+    (p.sum f).eval x = p.sum fun n a => (f n a).eval x
+--------------------------------------------------------------------------------
+
+Error details:
+--------------------------------------------------------------------------------
+tactic 'aesop' failed, made no progress
+Initial goal:
+  R : Type u_1
+  inst✝ : Semiring R
+  p : R[X]
+  f : ℕ → R → R[X]
+  x : R
+  ⊢ eval x (p.sum f) = p.sum fun n a => eval x (f n a)
+--------------------------------------------------------------------------------
+
+
+================================================================================
+FAILURE #18: eval_finset_sum
+================================================================================
+Line number: 356
+Has @[simp]: False
+Failure reason: SnippetStatus.lean_error
+Context: eval_r
+
+Original theorem signature:
+--------------------------------------------------------------------------------
+theorem eval_finset_sum (s : Finset ι) (g : ι → R[X]) (x : R) :
+    (∑ i ∈ s, g i).eval x = ∑ i ∈ s, (g i).eval x
+--------------------------------------------------------------------------------
+
+Error details:
+--------------------------------------------------------------------------------
+tactic 'aesop' failed, made no progress
+Initial goal:
+  R : Type u_1
+  ι : Type u_4
+  inst✝ : Semiring R
+  s : Finset ι
+  g : ι → R[X]
+  x : R
+  ⊢ eval x (∑ i ∈ s, g i) = ∑ i ∈ s, eval x (g i)
+--------------------------------------------------------------------------------
+
+
+================================================================================
+FAILURE #19: IsRoot
+================================================================================
+Line number: 374
+Has @[simp]: False
+Failure reason: SnippetStatus.lean_error
+Context: eval_r
+
+Original theorem signature:
+--------------------------------------------------------------------------------
+theorem IsRoot.dvd {R : Type*} [CommSemiring R] {p q : R[X]} {x : R} (h : p.IsRoot x)
+    (hpq : p ∣ q) : q.IsRoot x
+--------------------------------------------------------------------------------
+
+Error details:
+--------------------------------------------------------------------------------
+unsolved goals
+R : Type u_5
+inst : CommSemiring R
+p q : R[X]
+x : R
+h : eval x p = 0
+hpq : p ∣ q
+⊢ eval x q = 0
+--------------------------------------------------------------------------------
+
+
+================================================================================
+FAILURE #20: eval_surjective
+================================================================================
+Line number: 380
+Has @[simp]: False
+Failure reason: SnippetStatus.lean_error
+Context: eval_r
+
+Original theorem signature:
+--------------------------------------------------------------------------------
+theorem eval_surjective (x : R) : Function.Surjective <| eval x
+--------------------------------------------------------------------------------
+
+Error details:
+--------------------------------------------------------------------------------
+tactic 'aesop' failed, made no progress
+Initial goal:
+  R : Type u_1
+  inst✝ : Semiring R
+  x : R
+  ⊢ Function.Surjective (eval x)
+--------------------------------------------------------------------------------
+
+
+================================================================================
+FAILURE #21: comp_eq_sum_left
+================================================================================
+Line number: 390
+Has @[simp]: False
+Failure reason: SnippetStatus.lean_error
+Context: eval_r
+
+Original theorem signature:
+--------------------------------------------------------------------------------
+theorem comp_eq_sum_left : p.comp q = p.sum fun e a => C a * q ^ e
+--------------------------------------------------------------------------------
+
+Error details:
+--------------------------------------------------------------------------------
+tactic 'aesop' failed, made no progress
+Initial goal:
+  R : Type u_1
+  inst✝ : Semiring R
+  p q : R[X]
+  ⊢ p.comp q = p.sum fun e a => C a * q ^ e
+--------------------------------------------------------------------------------
+
+
+================================================================================
+FAILURE #22: mul_X_add_natCast_comp
+================================================================================
+Line number: 463
+Has @[simp]: False
+Failure reason: SnippetStatus.lean_error
+Context: eval_r
+
+Original theorem signature:
+--------------------------------------------------------------------------------
+theorem mul_X_add_natCast_comp {n : Nat} :
+    (p * (X + (n : R[X]))).comp q = p.comp q * (q + n)
+--------------------------------------------------------------------------------
+
+Error details:
+--------------------------------------------------------------------------------
+tactic 'aesop' failed, made no progress
+Initial goal:
+  R : Type u_1
+  inst✝ : Semiring R
+  p q : R[X]
+  n : ℕ
+  ⊢ (p * (X + ↑n)).comp q = p.comp q * (q + ↑n)
+--------------------------------------------------------------------------------
+
+
+================================================================================
+FAILURE #23: mul_comp_neg_X
+================================================================================
+Line number: 473
+Has @[simp]: True
+Failure reason: SnippetStatus.lean_error
+Context: eval_r
+
+Original theorem signature:
+--------------------------------------------------------------------------------
+@[simp]
+theorem mul_comp_neg_X {R : Type*} [Ring R] (p q : R[X]) :
+    (p * q).comp (-X) = p.comp (-X) * q.comp (-X)
+--------------------------------------------------------------------------------
+
+Error details:
+--------------------------------------------------------------------------------
+tactic 'aesop' failed, made no progress
+Initial goal:
+  R : Type u_5
+  inst✝ : Ring R
+  p q : R[X]
+  ⊢ (p * q).comp (-X) = p.comp (-X) * q.comp (-X)
+--------------------------------------------------------------------------------
+
+
+================================================================================
+FAILURE #24: comp_assoc
+================================================================================
+Line number: 483
+Has @[simp]: False
+Failure reason: SnippetStatus.lean_error
+Context: eval_r
+
+Original theorem signature:
+--------------------------------------------------------------------------------
+theorem comp_assoc {R : Type*} [CommSemiring R] (φ ψ χ : R[X]) :
+    (φ.comp ψ).comp χ = φ.comp (ψ.comp χ)
+--------------------------------------------------------------------------------
+
+Error details:
+--------------------------------------------------------------------------------
+tactic 'aesop' failed, made no progress
+Initial goal:
+  R : Type u_5
+  inst✝ : CommSemiring R
+  φ ψ χ : R[X]
+  ⊢ (φ.comp ψ).comp χ = φ.comp (ψ.comp χ)
+--------------------------------------------------------------------------------
+
+
+================================================================================
+FAILURE #25: map_dvd
+================================================================================
+Line number: 562
+Has @[simp]: False
+Failure reason: SnippetStatus.lean_error
+Context: map_section
+
+Original theorem signature:
+--------------------------------------------------------------------------------
+theorem map_dvd (f : R →+* S) {x y : R[X]} : x ∣ y → x.map f ∣ y.map f
+--------------------------------------------------------------------------------
+
+Error details:
+--------------------------------------------------------------------------------
+unsolved goals
+R : Type u_1
+S : Type u_2
+inst : Semiring R
+inst_1 : Semiring S
+f : R →+* S
+x y : R[X]
+a : x ∣ y
+⊢ map f x ∣ map f y
+--------------------------------------------------------------------------------
+
+
+================================================================================
+FAILURE #26: associated_map_map
+================================================================================
+Line number: 565
+Has @[simp]: False
+Failure reason: SnippetStatus.lean_error
+Context: map_section
+
+Original theorem signature:
+--------------------------------------------------------------------------------
+lemma associated_map_map (f : R →+* S) {x y : R[X]} :
+    Associated x y → Associated (x.map f) (y.map f)
+--------------------------------------------------------------------------------
+
+Error details:
+--------------------------------------------------------------------------------
+unsolved goals
+R : Type u_1
+S : Type u_2
+inst : Semiring R
+inst_1 : Semiring S
+f : R →+* S
+x y : R[X]
+a : Associated x y
+⊢ Associated (map f x) (map f y)
+--------------------------------------------------------------------------------
+
+
+================================================================================
+FAILURE #27: eval₂_eq_eval_map
+================================================================================
+Line number: 571
+Has @[simp]: False
+Failure reason: SnippetStatus.lean_error
+Context: map_section
+
+Original theorem signature:
+--------------------------------------------------------------------------------
+theorem eval₂_eq_eval_map {x : S} : p.eval₂ f x = (p.map f).eval x
+--------------------------------------------------------------------------------
+
+Error details:
+--------------------------------------------------------------------------------
+tactic 'aesop' failed, made no progress
+Initial goal:
+  R : Type u_1
+  S : Type u_2
+  inst✝¹ : Semiring R
+  p : R[X]
+  inst✝ : Semiring S
+  f : R →+* S
+  x : S
+  ⊢ eval₂ f x p = eval x (map f p)
+--------------------------------------------------------------------------------
+
+
+================================================================================
+FAILURE #28: eval_map
+================================================================================
+Line number: 583
+Has @[simp]: False
+Failure reason: SnippetStatus.lean_error
+Context: map_section
+
+Original theorem signature:
+--------------------------------------------------------------------------------
+theorem eval_map (x : S) : (p.map f).eval x = p.eval₂ f x
+--------------------------------------------------------------------------------
+
+Error details:
+--------------------------------------------------------------------------------
+tactic 'aesop' failed, made no progress
+Initial goal:
+  R : Type u_1
+  S : Type u_2
+  inst✝¹ : Semiring R
+  p : R[X]
+  inst✝ : Semiring S
+  f : R →+* S
+  x : S
+  ⊢ eval x (map f p) = eval₂ f x p
+--------------------------------------------------------------------------------
+
+
+================================================================================
+FAILURE #29: map_comp
+================================================================================
+Line number: 593
+Has @[simp]: False
+Failure reason: SnippetStatus.lean_error
+Context: map_section
+
+Original theorem signature:
+--------------------------------------------------------------------------------
+theorem map_comp (p q : R[X]) : map f (p.comp q) = (map f p).comp (map f q)
+--------------------------------------------------------------------------------
+
+Error details:
+--------------------------------------------------------------------------------
+tactic 'aesop' failed, made no progress
+Initial goal:
+  R : Type u_1
+  S : Type u_2
+  inst✝¹ : Semiring R
+  inst✝ : Semiring S
+  f : R →+* S
+  p q : R[X]
+  ⊢ map f (p.comp q) = (map f p).comp (map f q)
+--------------------------------------------------------------------------------
+
+
+================================================================================
+FAILURE #30: eval₂_multiset_prod
+================================================================================
+Line number: 659
+Has @[simp]: False
+Failure reason: SnippetStatus.lean_error
+Context: commsemiring_r
+
+Original theorem signature:
+--------------------------------------------------------------------------------
+theorem eval₂_multiset_prod (s : Multiset R[X]) (x : S) :
+    eval₂ f x s.prod = (s.map (eval₂ f x)).prod
+--------------------------------------------------------------------------------
+
+Error details:
+--------------------------------------------------------------------------------
+tactic 'aesop' failed, made no progress
+Initial goal:
+  R : Type u_1
+  S : Type u_2
+  inst✝¹ : CommSemiring R
+  inst✝ : CommSemiring S
+  f : R →+* S
+  s : Multiset R[X]
+  x : S
+  ⊢ eval₂ f x s.prod = (Multiset.map (eval₂ f x) s).prod
+--------------------------------------------------------------------------------
+
+
+================================================================================
+FAILURE #31: eval₂_finset_prod
+================================================================================
+Line number: 663
+Has @[simp]: False
+Failure reason: SnippetStatus.lean_error
+Context: commsemiring_r
+
+Original theorem signature:
+--------------------------------------------------------------------------------
+theorem eval₂_finset_prod (s : Finset ι) (g : ι → R[X]) (x : S) :
+    (∏ i ∈ s, g i).eval₂ f x = ∏ i ∈ s, (g i).eval₂ f x
+--------------------------------------------------------------------------------
+
+Error details:
+--------------------------------------------------------------------------------
+tactic 'aesop' failed, made no progress
+Initial goal:
+  R : Type u_1
+  S : Type u_2
+  ι : Type u_4
+  inst✝¹ : CommSemiring R
+  inst✝ : CommSemiring S
+  f : R →+* S
+  s : Finset ι
+  g : ι → R[X]
+  x : S
+  ⊢ eval₂ f x (∏ i ∈ s, g i) = ∏ i ∈ s, eval₂ f x (g i)
+--------------------------------------------------------------------------------
+
+
+================================================================================
+FAILURE #32: eval_list_prod
+================================================================================
+Line number: 669
+Has @[simp]: False
+Failure reason: SnippetStatus.lean_error
+Context: commsemiring_r
+
+Original theorem signature:
+--------------------------------------------------------------------------------
+theorem eval_list_prod (l : List R[X]) (x : R) : eval x l.prod = (l.map (eval x)).prod
+--------------------------------------------------------------------------------
+
+Error details:
+--------------------------------------------------------------------------------
+tactic 'aesop' failed, made no progress
+Initial goal:
+  R : Type u_1
+  inst✝ : CommSemiring R
+  l : List R[X]
+  x : R
+  ⊢ eval x l.prod = (List.map (eval x) l).prod
+--------------------------------------------------------------------------------
+
+
+================================================================================
+FAILURE #33: eval_multiset_prod
+================================================================================
+Line number: 674
+Has @[simp]: False
+Failure reason: SnippetStatus.lean_error
+Context: commsemiring_r
+
+Original theorem signature:
+--------------------------------------------------------------------------------
+theorem eval_multiset_prod (s : Multiset R[X]) (x : R) : eval x s.prod = (s.map (eval x)).prod
+--------------------------------------------------------------------------------
+
+Error details:
+--------------------------------------------------------------------------------
+tactic 'aesop' failed, made no progress
+Initial goal:
+  R : Type u_1
+  inst✝ : CommSemiring R
+  s : Multiset R[X]
+  x : R
+  ⊢ eval x s.prod = (Multiset.map (eval x) s).prod
+--------------------------------------------------------------------------------
+
+
+================================================================================
+FAILURE #34: eval_prod
+================================================================================
+Line number: 679
+Has @[simp]: False
+Failure reason: SnippetStatus.lean_error
+Context: commsemiring_r
+
+Original theorem signature:
+--------------------------------------------------------------------------------
+theorem eval_prod {ι : Type*} (s : Finset ι) (p : ι → R[X]) (x : R) :
+    eval x (∏ j ∈ s, p j) = ∏ j ∈ s, eval x (p j)
+--------------------------------------------------------------------------------
+
+Error details:
+--------------------------------------------------------------------------------
+tactic 'aesop' failed, made no progress
+Initial goal:
+  R : Type u_1
+  inst✝ : CommSemiring R
+  ι : Type u_5
+  s : Finset ι
+  p : ι → R[X]
+  x : R
+  ⊢ eval x (∏ j ∈ s, p j) = ∏ j ∈ s, eval x (p j)
+--------------------------------------------------------------------------------
+
+
+================================================================================
+FAILURE #35: list_prod_comp
+================================================================================
+Line number: 683
+Has @[simp]: False
+Failure reason: SnippetStatus.lean_error
+Context: commsemiring_r
+
+Original theorem signature:
+--------------------------------------------------------------------------------
+theorem list_prod_comp (l : List R[X]) (q : R[X]) :
+    l.prod.comp q = (l.map fun p : R[X] => p.comp q).prod
+--------------------------------------------------------------------------------
+
+Error details:
+--------------------------------------------------------------------------------
+tactic 'aesop' failed, made no progress
+Initial goal:
+  R : Type u_1
+  inst✝ : CommSemiring R
+  l : List R[X]
+  q : R[X]
+  ⊢ l.prod.comp q = (List.map (fun p => p.comp q) l).prod
+--------------------------------------------------------------------------------
+
+
+================================================================================
+FAILURE #36: multiset_prod_comp
+================================================================================
+Line number: 687
+Has @[simp]: False
+Failure reason: SnippetStatus.lean_error
+Context: commsemiring_r
+
+Original theorem signature:
+--------------------------------------------------------------------------------
+theorem multiset_prod_comp (s : Multiset R[X]) (q : R[X]) :
+    s.prod.comp q = (s.map fun p : R[X] => p.comp q).prod
+--------------------------------------------------------------------------------
+
+Error details:
+--------------------------------------------------------------------------------
+tactic 'aesop' failed, made no progress
+Initial goal:
+  R : Type u_1
+  inst✝ : CommSemiring R
+  s : Multiset R[X]
+  q : R[X]
+  ⊢ s.prod.comp q = (Multiset.map (fun p => p.comp q) s).prod
+--------------------------------------------------------------------------------
+
+
+================================================================================
+FAILURE #37: prod_comp
+================================================================================
+Line number: 691
+Has @[simp]: False
+Failure reason: SnippetStatus.lean_error
+Context: commsemiring_r
+
+Original theorem signature:
+--------------------------------------------------------------------------------
+theorem prod_comp {ι : Type*} (s : Finset ι) (p : ι → R[X]) (q : R[X]) :
+    (∏ j ∈ s, p j).comp q = ∏ j ∈ s, (p j).comp q
+--------------------------------------------------------------------------------
+
+Error details:
+--------------------------------------------------------------------------------
+tactic 'aesop' failed, made no progress
+Initial goal:
+  R : Type u_1
+  inst✝ : CommSemiring R
+  ι : Type u_5
+  s : Finset ι
+  p : ι → R[X]
+  q : R[X]
+  ⊢ (∏ j ∈ s, p j).comp q = ∏ j ∈ s, (p j).comp q
+--------------------------------------------------------------------------------
+
+
+================================================================================
+FAILURE #38: isRoot_prod
+================================================================================
+Line number: 695
+Has @[simp]: False
+Failure reason: SnippetStatus.lean_error
+Context: commsemiring_r
+
+Original theorem signature:
+--------------------------------------------------------------------------------
+theorem isRoot_prod {R} [CommSemiring R] [IsDomain R] {ι : Type*} (s : Finset ι) (p : ι → R[X])
+    (x : R) : IsRoot (∏ j ∈ s, p j) x ↔ ∃ i ∈ s, IsRoot (p i) x
+--------------------------------------------------------------------------------
+
+Error details:
+--------------------------------------------------------------------------------
+unsolved goals
+case mp
+R : Type u_6
+inst : CommSemiring R
+inst_1 : IsDomain R
+ι : Type u_5
+s : Finset ι
+p : ι → R[X]
+x : R
+a : eval x (∏ j ∈ s, p j) = 0
+⊢ ∃ i ∈ s, eval x (p i) = 0
+
+case mpr
+R : Type u_6
+inst : CommSemiring R
+inst_1 : IsDomain R
+ι : Type u_5
+s : Finset ι
+p : ι → R[X]
+x : R
+w : ι
+left : w ∈ s
+right : eval x (p w) = 0
+⊢ eval x (∏ j ∈ s, p j) = 0
+--------------------------------------------------------------------------------
+
+
+================================================================================
+FAILURE #39: eval_dvd
+================================================================================
+Line number: 700
+Has @[simp]: False
+Failure reason: SnippetStatus.lean_error
+Context: commsemiring_r
+
+Original theorem signature:
+--------------------------------------------------------------------------------
+@[gcongr]
+theorem eval_dvd : p ∣ q → eval x p ∣ eval x q
+--------------------------------------------------------------------------------
+
+Error details:
+--------------------------------------------------------------------------------
+unsolved goals
+R : Type u_1
+inst : CommSemiring R
+p q : R[X]
+x : R
+a : p ∣ q
+⊢ eval x p ∣ eval x q
+--------------------------------------------------------------------------------
+
+
+================================================================================
+FAILURE #40: eval_eq_zero_of_dvd_of_eval_eq_zero
+================================================================================
+Line number: 703
+Has @[simp]: False
+Failure reason: SnippetStatus.lean_error
+Context: commsemiring_r
+
+Original theorem signature:
+--------------------------------------------------------------------------------
+theorem eval_eq_zero_of_dvd_of_eval_eq_zero : p ∣ q → eval x p = 0 → eval x q = 0
+--------------------------------------------------------------------------------
+
+Error details:
+--------------------------------------------------------------------------------
+unsolved goals
+R : Type u_1
+inst : CommSemiring R
+p q : R[X]
+x : R
+a : p ∣ q
+a_1 : eval x p = 0
+⊢ eval x q = 0
+--------------------------------------------------------------------------------
+
+
+================================================================================
+FAILURE #41: root_X_sub_C
+================================================================================
+Line number: 773
+Has @[simp]: False
+Failure reason: SnippetStatus.lean_error
+Context: ring
+
+Original theorem signature:
+--------------------------------------------------------------------------------
+theorem root_X_sub_C : IsRoot (X - C a) b ↔ a = b
+--------------------------------------------------------------------------------
+
+Error details:
+--------------------------------------------------------------------------------
+unsolved goals
+case mp
+R : Type u_1
+a b : R
+inst : Ring R
+a_1 : b - a = 0
+⊢ a = b
+--------------------------------------------------------------------------------
+
+
+================================================================================
+FAILURE #42: mul_X_sub_intCast_comp
+================================================================================
+Line number: 793
+Has @[simp]: False
+Failure reason: SnippetStatus.lean_error
+Context: ring
+
+Original theorem signature:
+--------------------------------------------------------------------------------
+theorem mul_X_sub_intCast_comp {n : Nat} :
+    (p * (X - (n : R[X]))).comp q = p.comp q * (q - n)
+--------------------------------------------------------------------------------
+
+Error details:
+--------------------------------------------------------------------------------
+tactic 'aesop' failed, made no progress
+Initial goal:
+  R : Type u_1
+  inst✝ : Ring R
+  p q : R[X]
+  n : ℕ
+  ⊢ (p * (X - ↑n)).comp q = p.comp q * (q - ↑n)
+--------------------------------------------------------------------------------
+
+
