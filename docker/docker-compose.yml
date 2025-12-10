@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  # Kimina Lean Server (ARM64 Compatible)
+  kimina-server:
+    build:
+      context: https://github.com/project-numina/kimina-lean-server.git#main
+    network_mode: host
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8000/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
