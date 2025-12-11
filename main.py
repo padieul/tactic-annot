@@ -4,9 +4,35 @@
 """Extract and validate theorems from a Lean file using Kimina."""
 
 from kimina_client import KiminaClient
+from aesop_agent import (
+    AesopisationRequest,
+    AesopAgent
+)
 from lean_cleaner import LeanCodeCleaner
 from theorem_extractor import TheoremExtractor
 from datetime import datetime
+
+AGENT_CONFIG = {
+    # Autoformalization
+    "model": "Qwen/Qwen3-Coder-30B-A3B-Instruct",
+    "temperature": 0.5,  # 
+    "max_tokens": 2048,
+    "n_passes": 1,  # number of tries
+}
+
+aesop_agent = AesopAgent(
+    model = AGENT_CONFIG["model"], 
+    default_temperature=AGENT_CONFIG["temperature"]
+)
+"""
+request = AesopisationRequest(
+    lean_theorem_str=informal,
+    temperature=CONFIG["temperature"],
+    max_tokens=CONFIG["max_tokens"],
+)
+"""
+
+
 
 # Configuration constants
 PRINT_THEOREMS_NUM = 124  # Number of theorems to print
