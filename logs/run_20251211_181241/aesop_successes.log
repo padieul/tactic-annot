@@ -1,0 +1,553 @@
+AESOP SUCCESSES - RUN: run_20251211_181241
+Generated: 2025-12-11 18:15:31
+================================================================================
+
+Total successes in this run: 18
+
+================================================================================
+SUCCESS #1: eval₂_eq_sum [LLM]
+================================================================================
+Line number: 74
+Has @[simp]: False
+Method: llm_assisted
+Context: semiring_s
+LLM Version: 1
+LLM Attempts: 1
+
+Theorem signature:
+--------------------------------------------------------------------------------
+theorem eval₂_eq_sum {f : R →+* S} {x : S} : p.eval₂ f x = p.sum fun e a => f a * x ^ e
+--------------------------------------------------------------------------------
+
+Successful proof:
+--------------------------------------------------------------------------------
+theorem eval₂_eq_sum_test {f : R →+* S} {x : S} : p.eval₂ f x = p.sum fun e a => f a * x ^ e := by
+  aesop (add norm eval₂_def)
+--------------------------------------------------------------------------------
+
+Original proof (for reference):
+--------------------------------------------------------------------------------
+theorem eval₂_eq_sum_test {f : R →+* S} {x : S} : p.eval₂ f x = p.sum fun e a => f a * x ^ e := by
+  rw [eval₂_def]
+  -- aesop-- if we use the attribute annotation before
+  -- aesop (add norm eval₂_def)
+--------------------------------------------------------------------------------
+
+
+================================================================================
+SUCCESS #2: eval₂_list_sum [LLM]
+================================================================================
+Line number: 143
+Has @[simp]: False
+Method: llm_assisted
+Context: semiring_s
+LLM Version: 1
+LLM Attempts: 1
+
+Theorem signature:
+--------------------------------------------------------------------------------
+theorem eval₂_list_sum (l : List R[X]) (x : S) : eval₂ f x l.sum = (l.map (eval₂ f x)).sum
+--------------------------------------------------------------------------------
+
+Successful proof:
+--------------------------------------------------------------------------------
+theorem eval₂_list_sum_test (l : List R[X]) (x : S) : eval₂ f x l.sum = (l.map (eval₂ f x)).sum := by
+  induction l <;> aesop (add norm [eval₂AddMonoidHom, map_list_sum])
+--------------------------------------------------------------------------------
+
+Original proof (for reference):
+--------------------------------------------------------------------------------
+theorem eval₂_list_sum_test (l : List R[X]) (x : S) : eval₂ f x l.sum = (l.map (eval₂ f x)).sum :=
+  map_list_sum (eval₂AddMonoidHom f x) l
+--------------------------------------------------------------------------------
+
+
+================================================================================
+SUCCESS #3: eval₂_ofFinsupp [LLM]
+================================================================================
+Line number: 154
+Has @[simp]: False
+Method: llm_assisted
+Context: semiring_s
+LLM Version: 1
+LLM Attempts: 1
+
+Theorem signature:
+--------------------------------------------------------------------------------
+theorem eval₂_ofFinsupp {f : R →+* S} {x : S} {p : R[Nat]} :
+    eval₂ f x (⟨p⟩ : R[X]) = liftNC (↑f) (powersHom S x) p
+--------------------------------------------------------------------------------
+
+Successful proof:
+--------------------------------------------------------------------------------
+theorem eval₂_ofFinsupp_test {f : R →+* S} {x : S} {p : R[Nat]} :
+    eval₂ f x (⟨p⟩ : R[X]) = liftNC (↑f) (powersHom S x) p := by
+  aesop (add norm [eval₂_eq_sum])
+--------------------------------------------------------------------------------
+
+Original proof (for reference):
+--------------------------------------------------------------------------------
+theorem eval₂_ofFinsupp_test {f : R →+* S} {x : S} {p : R[Nat]} :
+    eval₂ f x (⟨p⟩ : R[X]) = liftNC (↑f) (powersHom S x) p := by
+  simp only [eval₂_eq_sum, sum, support, coeff]
+  rfl
+--------------------------------------------------------------------------------
+
+
+================================================================================
+SUCCESS #4: eval₂_list_prod_noncomm [LLM]
+================================================================================
+Line number: 183
+Has @[simp]: False
+Method: llm_assisted
+Context: semiring_s
+LLM Version: 1
+LLM Attempts: 1
+
+Theorem signature:
+--------------------------------------------------------------------------------
+theorem eval₂_list_prod_noncomm (ps : List R[X])
+    (hf : ∀ p ∈ ps, ∀ (k), Commute (f <| coeff p k) x) :
+    eval₂ f x ps.prod = (ps.map (Polynomial.eval₂ f x)).prod
+--------------------------------------------------------------------------------
+
+Successful proof:
+--------------------------------------------------------------------------------
+theorem eval₂_list_prod_noncomm_test (ps : List R[X])
+    (hf : ∀ p ∈ ps, ∀ (k), Commute (f <| coeff p k) x) :
+    eval₂ f x ps.prod = (ps.map (Polynomial.eval₂ f x)).prod := by
+  induction ps using List.reverseRecOn with
+  | nil => aesop
+  | append_singleton ps p ihp =>
+    aesop (add norm [eval₂_mul_noncomm, ihp])
+--------------------------------------------------------------------------------
+
+Original proof (for reference):
+--------------------------------------------------------------------------------
+theorem eval₂_list_prod_noncomm_test (ps : List R[X])
+    (hf : ∀ p ∈ ps, ∀ (k), Commute (f <| coeff p k) x) :
+    eval₂ f x ps.prod = (ps.map (Polynomial.eval₂ f x)).prod := by
+  induction ps using List.reverseRecOn with
+  | nil => simp
+  | append_singleton ps p ihp =>
+    simp only [List.forall_mem_append, List.forall_mem_singleton] at hf
+    simp [eval₂_mul_noncomm _ _ hf.2, ihp hf.1]
+--------------------------------------------------------------------------------
+
+
+================================================================================
+SUCCESS #5: eval₂_pow [LLM]
+================================================================================
+Line number: 238
+Has @[simp]: False
+Method: llm_assisted
+Context: commsemiring_s
+LLM Version: 1
+LLM Attempts: 2
+
+Theorem signature:
+--------------------------------------------------------------------------------
+theorem eval₂_pow (n : Nat) : (p ^ n).eval₂ f x = p.eval₂ f x ^ n
+--------------------------------------------------------------------------------
+
+Successful proof:
+--------------------------------------------------------------------------------
+theorem eval₂_pow_test (n : Nat) : (p ^ n).eval₂ f x = p.eval₂ f x ^ n := by
+  induction n with
+  | zero => simp [eval₂_one]
+  | succ n ih => 
+      simp [pow_succ, eval₂_mul, ih]
+--------------------------------------------------------------------------------
+
+Original proof (for reference):
+--------------------------------------------------------------------------------
+theorem eval₂_pow_test (n : Nat) : (p ^ n).eval₂ f x = p.eval₂ f x ^ n :=
+  (eval₂RingHom _ _).map_pow _ _
+--------------------------------------------------------------------------------
+
+
+================================================================================
+SUCCESS #6: eval₂_list_prod [LLM]
+================================================================================
+Line number: 249
+Has @[simp]: False
+Method: llm_assisted
+Context: commsemiring_s
+LLM Version: 1
+LLM Attempts: 2
+
+Theorem signature:
+--------------------------------------------------------------------------------
+theorem eval₂_list_prod (l : List R[X]) (x : S) : eval₂ f x l.prod = (l.map (eval₂ f x)).prod
+--------------------------------------------------------------------------------
+
+Successful proof:
+--------------------------------------------------------------------------------
+theorem eval₂_list_prod_test (l : List R[X]) (x : S) : eval₂ f x l.prod = (l.map (eval₂ f x)).prod := by
+  induction l with
+  | nil => aesop (add norm [eval₂_one, coe_eval₂RingHom])
+  | cons h t ih => aesop (add norm [eval₂_mul, coe_eval₂RingHom, ih])
+--------------------------------------------------------------------------------
+
+Original proof (for reference):
+--------------------------------------------------------------------------------
+theorem eval₂_list_prod_test (l : List R[X]) (x : S) : eval₂ f x l.prod = (l.map (eval₂ f x)).prod :=
+  map_list_prod (eval₂RingHom f x) l
+--------------------------------------------------------------------------------
+
+
+================================================================================
+SUCCESS #7: eval_eq_sum [LLM]
+================================================================================
+Line number: 267
+Has @[simp]: False
+Method: llm_assisted
+Context: eval_r
+LLM Version: 1
+LLM Attempts: 1
+
+Theorem signature:
+--------------------------------------------------------------------------------
+theorem eval_eq_sum : p.eval x = p.sum fun e a => a * x ^ e
+--------------------------------------------------------------------------------
+
+Successful proof:
+--------------------------------------------------------------------------------
+theorem eval_eq_sum_test : p.eval x = p.sum fun e a => a * x ^ e := by
+  aesop (add norm [eval, eval₂_eq_sum])
+--------------------------------------------------------------------------------
+
+Original proof (for reference):
+--------------------------------------------------------------------------------
+theorem eval_eq_sum_test : p.eval x = p.sum fun e a => a * x ^ e := by
+  rw [eval, eval₂_eq_sum]
+  rfl
+--------------------------------------------------------------------------------
+
+
+================================================================================
+SUCCESS #8: eval_listSum [LLM]
+================================================================================
+Line number: 345
+Has @[simp]: False
+Method: llm_assisted
+Context: eval_r
+LLM Version: 2
+LLM Attempts: 2
+
+Theorem signature:
+--------------------------------------------------------------------------------
+theorem eval_listSum (l : List R[X]) (x : R) : eval x l.sum = (l.map (eval x)).sum
+--------------------------------------------------------------------------------
+
+Successful proof:
+--------------------------------------------------------------------------------
+theorem eval_listSum_test (l : List R[X]) (x : R) : eval x l.sum = (l.map (eval x)).sum := by
+  induction l <;> aesop (add norm [eval_zero, eval_add, List.map])
+--------------------------------------------------------------------------------
+
+Original proof (for reference):
+--------------------------------------------------------------------------------
+theorem eval_listSum_test (l : List R[X]) (x : R) : eval x l.sum = (l.map (eval x)).sum :=
+  eval₂_list_sum ..
+--------------------------------------------------------------------------------
+
+
+================================================================================
+SUCCESS #9: eval_multisetSum [LLM]
+================================================================================
+Line number: 349
+Has @[simp]: False
+Method: llm_assisted
+Context: eval_r
+LLM Version: 2
+LLM Attempts: 2
+
+Theorem signature:
+--------------------------------------------------------------------------------
+theorem eval_multisetSum (s : Multiset R[X]) (x : R) : eval x s.sum = (s.map (eval x)).sum
+--------------------------------------------------------------------------------
+
+Successful proof:
+--------------------------------------------------------------------------------
+theorem eval_multisetSum_test (s : Multiset R[X]) (x : R) : eval x s.sum = (s.map (eval x)).sum := by
+  induction s using Multiset.induction_on with
+  | empty => aesop (add norm [eval_zero, Multiset.map_zero])
+  | cons a s ih => aesop (add norm [eval_add, Multiset.map_cons, ih])
+--------------------------------------------------------------------------------
+
+Original proof (for reference):
+--------------------------------------------------------------------------------
+theorem eval_multisetSum_test (s : Multiset R[X]) (x : R) : eval x s.sum = (s.map (eval x)).sum :=
+  eval₂_multiset_sum ..
+--------------------------------------------------------------------------------
+
+
+================================================================================
+SUCCESS #10: eval_surjective [LLM]
+================================================================================
+Line number: 380
+Has @[simp]: False
+Method: llm_assisted
+Context: eval_r
+LLM Version: 1
+LLM Attempts: 1
+
+Theorem signature:
+--------------------------------------------------------------------------------
+theorem eval_surjective (x : R) : Function.Surjective <| eval x
+--------------------------------------------------------------------------------
+
+Successful proof:
+--------------------------------------------------------------------------------
+theorem eval_surjective_test (x : R) : Function.Surjective <| eval x := fun y => ⟨C y, by aesop (add norm eval_C)⟩
+--------------------------------------------------------------------------------
+
+Original proof (for reference):
+--------------------------------------------------------------------------------
+theorem eval_surjective_test (x : R) : Function.Surjective <| eval x := fun y => ⟨C y, eval_C⟩
+--------------------------------------------------------------------------------
+
+
+================================================================================
+SUCCESS #11: comp_eq_sum_left [LLM]
+================================================================================
+Line number: 390
+Has @[simp]: False
+Method: llm_assisted
+Context: eval_r
+LLM Version: 1
+LLM Attempts: 1
+
+Theorem signature:
+--------------------------------------------------------------------------------
+theorem comp_eq_sum_left : p.comp q = p.sum fun e a => C a * q ^ e
+--------------------------------------------------------------------------------
+
+Successful proof:
+--------------------------------------------------------------------------------
+theorem comp_eq_sum_left_test : p.comp q = p.sum fun e a => C a * q ^ e := by aesop (add norm [comp, eval₂_eq_sum])
+--------------------------------------------------------------------------------
+
+Original proof (for reference):
+--------------------------------------------------------------------------------
+theorem comp_eq_sum_left_test : p.comp q = p.sum fun e a => C a * q ^ e := by rw [comp, eval₂_eq_sum]
+--------------------------------------------------------------------------------
+
+
+================================================================================
+SUCCESS #12: eval₂_eq_eval_map [LLM]
+================================================================================
+Line number: 571
+Has @[simp]: False
+Method: llm_assisted
+Context: map_section
+LLM Version: 1
+LLM Attempts: 1
+
+Theorem signature:
+--------------------------------------------------------------------------------
+theorem eval₂_eq_eval_map {x : S} : p.eval₂ f x = (p.map f).eval x
+--------------------------------------------------------------------------------
+
+Successful proof:
+--------------------------------------------------------------------------------
+theorem eval₂_eq_eval_map_test {x : S} : p.eval₂ f x = (p.map f).eval x := by
+  induction p using Polynomial.induction_on' with
+  | h_add p q hp hq => aesop (add norm [hp, hq])
+  | h_monomial n r => aesop
+--------------------------------------------------------------------------------
+
+Original proof (for reference):
+--------------------------------------------------------------------------------
+theorem eval₂_eq_eval_map_test {x : S} : p.eval₂ f x = (p.map f).eval x := by
+  induction p using Polynomial.induction_on' with
+  | add p q hp hq => simp [hp, hq]
+  | monomial n r => simp
+--------------------------------------------------------------------------------
+
+
+================================================================================
+SUCCESS #13: eval_map [LLM]
+================================================================================
+Line number: 583
+Has @[simp]: False
+Method: llm_assisted
+Context: map_section
+LLM Version: 1
+LLM Attempts: 1
+
+Theorem signature:
+--------------------------------------------------------------------------------
+theorem eval_map (x : S) : (p.map f).eval x = p.eval₂ f x
+--------------------------------------------------------------------------------
+
+Successful proof:
+--------------------------------------------------------------------------------
+theorem eval_map_test (x : S) : (p.map f).eval x = p.eval₂ f x := by
+  aesop (add norm eval₂_eq_eval_map)
+--------------------------------------------------------------------------------
+
+Original proof (for reference):
+--------------------------------------------------------------------------------
+theorem eval_map_test (x : S) : (p.map f).eval x = p.eval₂ f x :=
+  (eval₂_eq_eval_map f).symm
+--------------------------------------------------------------------------------
+
+
+================================================================================
+SUCCESS #14: map_comp [LLM]
+================================================================================
+Line number: 593
+Has @[simp]: False
+Method: llm_assisted
+Context: map_section
+LLM Version: 1
+LLM Attempts: 2
+
+Theorem signature:
+--------------------------------------------------------------------------------
+theorem map_comp (p q : R[X]) : map f (p.comp q) = (map f p).comp (map f q)
+--------------------------------------------------------------------------------
+
+Successful proof:
+--------------------------------------------------------------------------------
+theorem map_comp_test (p q : R[X]) : map f (p.comp q) = (map f p).comp (map f q) := by
+  induction p using Polynomial.induction_on with
+  | h_C a => aesop (add norm [map_C, C_comp])
+  | h_add p1 p2 ih1 ih2 => aesop (add norm [map_add, add_comp, ih1, ih2])
+  | h_monomial n a => aesop (add norm [map_monomial, monomial_comp, pow_comp, map_C])
+--------------------------------------------------------------------------------
+
+Original proof (for reference):
+--------------------------------------------------------------------------------
+theorem map_comp_test (p q : R[X]) : map f (p.comp q) = (map f p).comp (map f q) :=
+  Polynomial.induction_on p (by simp only [map_C, forall_const, C_comp])
+    (by
+      simp +contextual only [Polynomial.map_add, add_comp, forall_const,
+        imp_true_iff])
+    (by
+      simp +contextual only [pow_succ, ← mul_assoc, comp, forall_const,
+        eval₂_mul_X, imp_true_iff, map_X, Polynomial.map_mul])
+--------------------------------------------------------------------------------
+
+
+================================================================================
+SUCCESS #15: eval_list_prod [LLM]
+================================================================================
+Line number: 669
+Has @[simp]: False
+Method: llm_assisted
+Context: commsemiring_r
+LLM Version: 1
+LLM Attempts: 2
+
+Theorem signature:
+--------------------------------------------------------------------------------
+theorem eval_list_prod (l : List R[X]) (x : R) : eval x l.prod = (l.map (eval x)).prod
+--------------------------------------------------------------------------------
+
+Successful proof:
+--------------------------------------------------------------------------------
+theorem eval_list_prod_test (l : List R[X]) (x : R) : eval x l.prod = (l.map (eval x)).prod := by
+  induction l with
+  | nil => aesop (add norm [eval_one, List.map_nil, List.prod_nil])
+  | cons h t ih => aesop (add norm [eval_mul, List.map_cons, List.prod_cons, ih])
+--------------------------------------------------------------------------------
+
+Original proof (for reference):
+--------------------------------------------------------------------------------
+theorem eval_list_prod_test (l : List R[X]) (x : R) : eval x l.prod = (l.map (eval x)).prod :=
+  map_list_prod (evalRingHom x) l
+--------------------------------------------------------------------------------
+
+
+================================================================================
+SUCCESS #16: eval_multiset_prod [LLM]
+================================================================================
+Line number: 674
+Has @[simp]: False
+Method: llm_assisted
+Context: commsemiring_r
+LLM Version: 1
+LLM Attempts: 2
+
+Theorem signature:
+--------------------------------------------------------------------------------
+theorem eval_multiset_prod (s : Multiset R[X]) (x : R) : eval x s.prod = (s.map (eval x)).prod
+--------------------------------------------------------------------------------
+
+Successful proof:
+--------------------------------------------------------------------------------
+theorem eval_multiset_prod_test (s : Multiset R[X]) (x : R) : eval x s.prod = (s.map (eval x)).prod := by
+  induction s using Multiset.induction_on with
+  | empty => aesop (add norm [eval_one, Multiset.map_zero])
+  | cons a s ih => aesop (add norm [eval_mul, Multiset.map_cons, ih])
+--------------------------------------------------------------------------------
+
+Original proof (for reference):
+--------------------------------------------------------------------------------
+theorem eval_multiset_prod_test (s : Multiset R[X]) (x : R) : eval x s.prod = (s.map (eval x)).prod :=
+  (evalRingHom x).map_multiset_prod s
+--------------------------------------------------------------------------------
+
+
+================================================================================
+SUCCESS #17: isRoot_prod [LLM]
+================================================================================
+Line number: 695
+Has @[simp]: False
+Method: llm_assisted
+Context: commsemiring_r
+LLM Version: 1
+LLM Attempts: 1
+
+Theorem signature:
+--------------------------------------------------------------------------------
+theorem isRoot_prod {R} [CommSemiring R] [IsDomain R] {ι : Type*} (s : Finset ι) (p : ι → R[X])
+    (x : R) : IsRoot (∏ j ∈ s, p j) x ↔ ∃ i ∈ s, IsRoot (p i) x
+--------------------------------------------------------------------------------
+
+Successful proof:
+--------------------------------------------------------------------------------
+theorem isRoot_prod_test {R} [CommSemiring R] [IsDomain R] {ι : Type*} (s : Finset ι) (p : ι → R[X])
+    (x : R) : IsRoot (∏ j ∈ s, p j) x ↔ ∃ i ∈ s, IsRoot (p i) x := by
+  aesop (add norm [IsRoot.def, eval_prod]) (add simp Finset.prod_eq_zero_iff)
+--------------------------------------------------------------------------------
+
+Original proof (for reference):
+--------------------------------------------------------------------------------
+theorem isRoot_prod_test {R} [CommSemiring R] [IsDomain R] {ι : Type*} (s : Finset ι) (p : ι → R[X])
+    (x : R) : IsRoot (∏ j ∈ s, p j) x ↔ ∃ i ∈ s, IsRoot (p i) x := by
+  simp only [IsRoot, eval_prod, Finset.prod_eq_zero_iff]
+--------------------------------------------------------------------------------
+
+
+================================================================================
+SUCCESS #18: root_X_sub_C [LLM]
+================================================================================
+Line number: 773
+Has @[simp]: False
+Method: llm_assisted
+Context: ring
+LLM Version: 1
+LLM Attempts: 2
+
+Theorem signature:
+--------------------------------------------------------------------------------
+theorem root_X_sub_C : IsRoot (X - C a) b ↔ a = b
+--------------------------------------------------------------------------------
+
+Successful proof:
+--------------------------------------------------------------------------------
+theorem root_X_sub_C_test : IsRoot (X - C a) b ↔ a = b := by
+  aesop (add norm [IsRoot.def, eval_sub, eval_X, eval_C, sub_eq_zero])
+--------------------------------------------------------------------------------
+
+Original proof (for reference):
+--------------------------------------------------------------------------------
+theorem root_X_sub_C_test : IsRoot (X - C a) b ↔ a = b := by
+  rw [IsRoot.def, eval_sub, eval_X, eval_C, sub_eq_zero, eq_comm]
+--------------------------------------------------------------------------------
+
+

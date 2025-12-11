@@ -9,10 +9,13 @@ from typing import Optional, List, Dict, Any
 class AesopisationRequest:
     """Request for autoformalization."""
 
-    lean_theorem_str: str
+    lean_theorem_str: str  # The theorem text (with or without proof)
     context: Optional[str] = None  # Additional Lean context (imports, definitions)
     max_tokens: int = 512
     temperature: float = 0.0
+    n_versions: int = 1  # Number of parallel proof versions to generate
+    max_retries: int = 1  # Max retries per version with error feedback
+    previous_attempts: Optional[List[Dict[str, str]]] = None  # List of {attempt, error} for retry context
     metadata: Dict[str, Any] = field(default_factory=dict)
 
 

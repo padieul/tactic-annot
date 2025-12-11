@@ -3,7 +3,7 @@ from .aesop_agent import AesopAgent
 
 
 __all__ = [
-    "AutoformalizerBase",
+    "AesopAgentBase",
     "AesopisationRequest",
     "AesopisationResult",
     "AesopAgent",
