@@ -76,7 +76,18 @@ class AesopAgent(AesopAgentBase):
         if self._initialized:
             return
 
-        self._client = OpenAI(base_url=self.base_url, api_key=self.api_key)
+        # Create client with custom httpx client to disable progress bars
+        import httpx
+        http_client = httpx.Client(
+            timeout=httpx.Timeout(60.0, connect=10.0),
+            limits=httpx.Limits(max_connections=100, max_keepalive_connections=20),
+        )
+        
+        self._client = OpenAI(
+            base_url=self.base_url, 
+            api_key=self.api_key,
+            http_client=http_client
+        )
         self._initialized = True
         print(f"Connected to Nebius API ({self.model})")
 

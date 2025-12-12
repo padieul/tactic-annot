@@ -1,0 +1,686 @@
+{
+  "lean_file": "data/full_defs_new.lean",
+  "created": "2025-12-12 01:00:39",
+  "last_updated": "2025-12-12 01:23:30",
+  "theorems": {
+    "eval₂_eq_sum": {
+      "proof": "theorem eval₂_eq_sum_test {f : R →+* S} {x : S} : p.eval₂ f x = p.sum fun e a => f a * x ^ e := by\n  aesop (add norm simp [eval₂_def])",
+      "method": "LLM",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval₂_congr": {
+      "proof": "theorem eval₂_congr_test {R S : Type*} [Semiring R] [Semiring S] {f g : R →+* S} {s t : S}\n    {φ ψ : R[X]} : f = g → s = t → φ = ψ → eval₂ f s φ = eval₂ g t ψ := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval₂_zero": {
+      "proof": "@[simp]\ntheorem eval₂_zero_test : (0 : R[X]).eval₂ f x = 0 := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval₂_C": {
+      "proof": "@[simp]\ntheorem eval₂_C_test : (C a).eval₂ f x = f a := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval₂_X": {
+      "proof": "@[simp]\ntheorem eval₂_X_test : X.eval₂ f x = x := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval₂_monomial": {
+      "proof": "@[simp]\ntheorem eval₂_monomial_test {n : Nat} {r : R} : (monomial n r).eval₂ f x = f r * x ^ n := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval₂_X_pow": {
+      "proof": "@[simp]\ntheorem eval₂_X_pow_test {n : Nat} : (X ^ n).eval₂ f x = x ^ n := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval₂_add": {
+      "proof": "@[simp]\ntheorem eval₂_add_test : (p + q).eval₂ f x = p.eval₂ f x + q.eval₂ f x := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval₂_one": {
+      "proof": "@[simp]\ntheorem eval₂_one_test : (1 : R[X]).eval₂ f x = 1 := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval₂_natCast": {
+      "proof": "@[simp]\ntheorem eval₂_natCast_test (n : Nat) : (n : R[X]).eval₂ f x = n := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval₂_ofNat": {
+      "proof": "@[simp]\nlemma eval₂_ofNat_test {S : Type*} [Semiring S] (n : Nat) [n.AtLeastTwo] (f : R →+* S) (a : S) :\n    (ofNat(n) : R[X]).eval₂ f a = ofNat(n) := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval₂_list_sum": {
+      "proof": "theorem eval₂_list_sum_test (l : List R[X]) (x : S) : eval₂ f x l.sum = (l.map (eval₂ f x)).sum := by\n  induction l <;> aesop",
+      "method": "LLM",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval₂_ofFinsupp": {
+      "proof": "theorem eval₂_ofFinsupp_test {f : R →+* S} {x : S} {p : R[Nat]} :\n    eval₂ f x (⟨p⟩ : R[X]) = liftNC (↑f) (powersHom S x) p := by\n  aesop (add norm simp [eval₂_eq_sum, sum, support, coeff])",
+      "method": "LLM",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval₂_mul_X": {
+      "proof": "@[simp]\ntheorem eval₂_mul_X_test : eval₂ f x (p * X) = eval₂ f x p * x := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval₂_X_mul": {
+      "proof": "@[simp]\ntheorem eval₂_X_mul_test : eval₂ f x (X * p) = eval₂ f x p * x := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval₂_mul": {
+      "proof": "@[simp]\ntheorem eval₂_mul_test : (p * q).eval₂ f x = p.eval₂ f x * q.eval₂ f x := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval₂_mul_eq_zero_of_left": {
+      "proof": "theorem eval₂_mul_eq_zero_of_left_test (q : R[X]) (hp : p.eval₂ f x = 0) : (p * q).eval₂ f x = 0 := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval₂_mul_eq_zero_of_right": {
+      "proof": "theorem eval₂_mul_eq_zero_of_right_test (p : R[X]) (hq : q.eval₂ f x = 0) : (p * q).eval₂ f x = 0 := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "coe_eval₂RingHom": {
+      "proof": "@[simp]\ntheorem coe_eval₂RingHom_test (f : R →+* S) (x) : ⇑(eval₂RingHom f x) = eval₂ f x := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval₂_pow": {
+      "proof": "theorem eval₂_pow_test (n : Nat) : (p ^ n).eval₂ f x = p.eval₂ f x ^ n := by\n  induction n with\n  | zero =>\n    simp [pow_zero, eval₂_one]\n  | succ n ih =>\n    simp [pow_succ, eval₂_mul]\n    aesop (add norm simp [ih, eval₂RingHom, map_pow])",
+      "method": "LLM",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval₂_list_prod": {
+      "proof": "theorem eval₂_list_prod_test (l : List R[X]) (x : S) : eval₂ f x l.prod = (l.map (eval₂ f x)).prod := by\n  induction l <;> aesop (add norm simp [map_list_prod])",
+      "method": "LLM",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval₂_id": {
+      "proof": "@[simp]\ntheorem eval₂_id_test : eval₂ (RingHom.id _) x p = p.eval x := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval_eq_sum": {
+      "proof": "theorem eval_eq_sum_test : p.eval x = p.sum fun e a => a * x ^ e := by\n  aesop (add norm simp [eval, eval₂_eq_sum])",
+      "method": "LLM",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval₂_at_apply": {
+      "proof": "@[simp]\ntheorem eval₂_at_apply_test {S : Type*} [Semiring S] (f : R →+* S) (r : R) :\n    p.eval₂ f (f r) = f (p.eval r) := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval₂_at_one": {
+      "proof": "@[simp]\ntheorem eval₂_at_one_test {S : Type*} [Semiring S] (f : R →+* S) : p.eval₂ f 1 = f (p.eval 1) := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval₂_at_natCast": {
+      "proof": "@[simp]\ntheorem eval₂_at_natCast_test {S : Type*} [Semiring S] (f : R →+* S) (n : Nat) :\n    p.eval₂ f n = f (p.eval n) := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval₂_at_ofNat": {
+      "proof": "@[simp]\ntheorem eval₂_at_ofNat_test {S : Type*} [Semiring S] (f : R →+* S) (n : Nat) [n.AtLeastTwo] :\n    p.eval₂ f ofNat(n) = f (p.eval (ofNat(n))) := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval_C": {
+      "proof": "@[simp]\ntheorem eval_C_test : (C a).eval x = a := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval_natCast": {
+      "proof": "@[simp]\ntheorem eval_natCast_test {n : Nat} : (n : R[X]).eval x = n := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval_ofNat": {
+      "proof": "@[simp]\nlemma eval_ofNat_test (n : Nat) [n.AtLeastTwo] (a : R) :\n    (ofNat(n) : R[X]).eval a = ofNat(n) := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval_X": {
+      "proof": "@[simp]\ntheorem eval_X_test : X.eval x = x := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval_monomial": {
+      "proof": "@[simp]\ntheorem eval_monomial_test {n a} : (monomial n a).eval x = a * x ^ n := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval_zero": {
+      "proof": "@[simp]\ntheorem eval_zero_test : (0 : R[X]).eval x = 0 := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval_add": {
+      "proof": "@[simp]\ntheorem eval_add_test : (p + q).eval x = p.eval x + q.eval x := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval_one": {
+      "proof": "@[simp]\ntheorem eval_one_test : (1 : R[X]).eval x = 1 := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval_C_mul": {
+      "proof": "@[simp]\ntheorem eval_C_mul_test : (C a * p).eval x = a * p.eval x := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval_natCast_mul": {
+      "proof": "@[simp]\ntheorem eval_natCast_mul_test {n : Nat} : ((n : R[X]) * p).eval x = n * p.eval x := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval_mul_X": {
+      "proof": "@[simp]\ntheorem eval_mul_X_test : (p * X).eval x = p.eval x * x := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval_mul_X_pow": {
+      "proof": "@[simp]\ntheorem eval_mul_X_pow_test {k : Nat} : (p * X ^ k).eval x = p.eval x * x ^ k := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval_listSum": {
+      "proof": "theorem eval_listSum_test (l : List R[X]) (x : R) : eval x l.sum = (l.map (eval x)).sum := by\n  induction l with\n  | nil => aesop\n  | cons h t ih => aesop (add norm simp [ih, eval₂_list_sum])",
+      "method": "LLM",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval_multisetSum": {
+      "proof": "theorem eval_multisetSum_test (s : Multiset R[X]) (x : R) : eval x s.sum = (s.map (eval x)).sum := by\n  induction s using Multiset.induction_on with\n  | empty => aesop\n  | cons a s ih => aesop (add norm simp [ih, eval₂_multiset_sum, eval₂_add, eval₂_C, eval₂_X])",
+      "method": "LLM",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "IsRoot": {
+      "proof": "theorem IsRoot_test.eq_zero (h : IsRoot p x) : eval x p = 0 := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "not_isRoot_C": {
+      "proof": "theorem not_isRoot_C_test (r a : R) (hr : r ≠ 0) : ¬IsRoot (C r) a := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "comp_eq_sum_left": {
+      "proof": "theorem comp_eq_sum_left_test : p.comp q = p.sum fun e a => C a * q ^ e := by\n  aesop (add norm simp [comp, eval₂_eq_sum])",
+      "method": "LLM",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "comp_X": {
+      "proof": "@[simp]\ntheorem comp_X_test : p.comp X = p := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "X_comp": {
+      "proof": "@[simp]\ntheorem X_comp_test : X.comp p = p := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "comp_C": {
+      "proof": "@[simp]\ntheorem comp_C_test : p.comp (C a) = C (p.eval a) := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "C_comp": {
+      "proof": "@[simp]\ntheorem C_comp_test : (C a).comp p = C a := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "natCast_comp": {
+      "proof": "@[simp]\ntheorem natCast_comp_test {n : Nat} : (n : R[X]).comp p = n := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "ofNat_comp": {
+      "proof": "@[simp]\ntheorem ofNat_comp_test (n : Nat) [n.AtLeastTwo] : (ofNat(n) : R[X]).comp p = n := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "comp_zero": {
+      "proof": "@[simp]\ntheorem comp_zero_test : p.comp (0 : R[X]) = C (p.eval 0) := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "zero_comp": {
+      "proof": "@[simp]\ntheorem zero_comp_test : comp (0 : R[X]) p = 0 := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "comp_one": {
+      "proof": "@[simp]\ntheorem comp_one_test : p.comp 1 = C (p.eval 1) := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "one_comp": {
+      "proof": "@[simp]\ntheorem one_comp_test : comp (1 : R[X]) p = 1 := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "add_comp": {
+      "proof": "@[simp]\ntheorem add_comp_test : (p + q).comp r = p.comp r + q.comp r := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "monomial_comp": {
+      "proof": "@[simp]\ntheorem monomial_comp_test (n : Nat) : (monomial n a).comp p = C a * p ^ n := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "mul_X_comp": {
+      "proof": "@[simp]\ntheorem mul_X_comp_test : (p * X).comp r = p.comp r * r := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "X_pow_comp": {
+      "proof": "@[simp]\ntheorem X_pow_comp_test {k : Nat} : (X ^ k).comp p = p ^ k := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "mul_X_pow_comp": {
+      "proof": "@[simp]\ntheorem mul_X_pow_comp_test {k : Nat} : (p * X ^ k).comp r = p.comp r * r ^ k := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "C_mul_comp": {
+      "proof": "@[simp]\ntheorem C_mul_comp_test : (C a * p).comp r = C a * p.comp r := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "natCast_mul_comp": {
+      "proof": "@[simp]\ntheorem natCast_mul_comp_test {n : Nat} : ((n : R[X]) * p).comp r = n * p.comp r := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "mul_comp": {
+      "proof": "@[simp]\ntheorem mul_comp_test {R : Type*} [CommSemiring R] (p q r : R[X]) :\n    (p * q).comp r = p.comp r * q.comp r := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "pow_comp": {
+      "proof": "@[simp]\ntheorem pow_comp_test {R : Type*} [CommSemiring R] (p q : R[X]) (n : Nat) :\n    (p ^ n).comp q = p.comp q ^ n := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "map_C": {
+      "proof": "@[simp]\ntheorem map_C_test : (C a).map f = C (f a) := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "map_X": {
+      "proof": "@[simp]\ntheorem map_X_test : X.map f = X := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "map_monomial": {
+      "proof": "@[simp]\ntheorem map_monomial_test {n a} : (monomial n a).map f = monomial n (f a) := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "coe_mapRingHom": {
+      "proof": "@[simp]\ntheorem coe_mapRingHom_test (f : R →+* S) : ⇑(mapRingHom f) = map f := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "mapRingHom_comp_C": {
+      "proof": "lemma mapRingHom_comp_C_test {R S : Type*} [Semiring R] [Semiring S] (f : R →+* S) :\n    (mapRingHom f).comp C = C.comp f := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval₂_eq_eval_map": {
+      "proof": "theorem eval₂_eq_eval_map_test {x : S} : p.eval₂ f x = (p.map f).eval x := by\n  induction p using Polynomial.induction_on' with\n  | h_add p q hp hq =>\n    aesop (add norm simp [hp, hq, eval₂_add, eval_add, map_add])\n  | h_monomial n r =>\n    aesop (add norm simp [eval₂_monomial, map_monomial, eval_monomial])",
+      "method": "LLM",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval_map": {
+      "proof": "theorem eval_map_test (x : S) : (p.map f).eval x = p.eval₂ f x := by\n  aesop (add norm simp [eval₂_eq_eval_map])",
+      "method": "LLM",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval_mul": {
+      "proof": "@[simp]\ntheorem eval_mul_test : (p * q).eval x = p.eval x * q.eval x := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "coe_evalRingHom": {
+      "proof": "@[simp]\ntheorem coe_evalRingHom_test (r : R) : (evalRingHom r : R[X] → R) = eval r := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval_pow": {
+      "proof": "@[simp]\ntheorem eval_pow_test (n : Nat) : (p ^ n).eval x = p.eval x ^ n := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval_X_pow": {
+      "proof": "theorem eval_X_pow_test (n : Nat) : (X ^ n : R[X]).eval x = x ^ n := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval_comp": {
+      "proof": "@[simp]\ntheorem eval_comp_test : (p.comp q).eval x = p.eval (q.eval x) := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "isRoot_comp": {
+      "proof": "lemma isRoot_comp_test {R} [CommSemiring R] {p q : R[X]} {r : R} :\n    (p.comp q).IsRoot r ↔ p.IsRoot (q.eval r) := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "coe_compRingHom": {
+      "proof": "@[simp]\ntheorem coe_compRingHom_test (q : R[X]) : (compRingHom q : R[X] → R[X]) = fun p => comp p q := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "coe_compRingHom_apply": {
+      "proof": "theorem coe_compRingHom_apply_test (p q : R[X]) : (compRingHom q : R[X] → R[X]) p = comp p q := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "root_mul_left_of_isRoot": {
+      "proof": "theorem root_mul_left_of_isRoot_test (p : R[X]) {q : R[X]} : IsRoot q a → IsRoot (p * q) a := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "root_mul_right_of_isRoot": {
+      "proof": "theorem root_mul_right_of_isRoot_test {p : R[X]} (q : R[X]) : IsRoot p a → IsRoot (p * q) a := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval_list_prod": {
+      "proof": "theorem eval_list_prod_test (l : List R[X]) (x : R) : eval x l.prod = (l.map (eval x)).prod :=\n  by induction l <;> aesop (add norm simp [eval_mul, eval_one, map_list_prod, coe_evalRingHom])",
+      "method": "LLM",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "isRoot_prod": {
+      "proof": "theorem isRoot_prod_test {R} [CommSemiring R] [IsDomain R] {ι : Type*} (s : Finset ι) (p : ι → R[X])\n    (x : R) : IsRoot (∏ j ∈ s, p j) x ↔ ∃ i ∈ s, IsRoot (p i) x := by\n  aesop (add norm simp [IsRoot, eval_prod, Finset.prod_eq_zero_iff])",
+      "method": "LLM",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval_geom_sum": {
+      "proof": "@[simp]\ntheorem eval_geom_sum_test {R} [CommSemiring R] {n : Nat} {x : R} :\n    eval x (∑ i ∈ range n, X ^ i) = ∑ i ∈ range n, x ^ i := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "root_mul": {
+      "proof": "lemma root_mul_test : IsRoot (p * q) a ↔ IsRoot p a ∨ IsRoot q a := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "root_or_root_of_root_mul": {
+      "proof": "lemma root_or_root_of_root_mul_test (h : IsRoot (p * q) a) : IsRoot p a ∨ IsRoot q a := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval_intCast": {
+      "proof": "@[simp]\ntheorem eval_intCast_test {n : Int} {x : R} : (n : R[X]).eval x = n := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval₂_neg": {
+      "proof": "@[simp]\ntheorem eval₂_neg_test {S} [Ring S] (f : R →+* S) {x : S} : (-p).eval₂ f x = -p.eval₂ f x := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval₂_sub": {
+      "proof": "@[simp]\ntheorem eval₂_sub_test {S} [Ring S] (f : R →+* S) {x : S} :\n    (p - q).eval₂ f x = p.eval₂ f x - q.eval₂ f x := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval_neg": {
+      "proof": "@[simp]\ntheorem eval_neg_test (p : R[X]) (x : R) : (-p).eval x = -p.eval x := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval_sub": {
+      "proof": "@[simp]\ntheorem eval_sub_test (p q : R[X]) (x : R) : (p - q).eval x = p.eval x - q.eval x := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "root_X_sub_C": {
+      "proof": "theorem root_X_sub_C_test : IsRoot (X - C a) b ↔ a = b := by\n  aesop (add norm simp [IsRoot.def, eval_sub, eval_X, eval_C, sub_eq_zero, eq_comm])",
+      "method": "LLM",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "neg_comp": {
+      "proof": "@[simp]\ntheorem neg_comp_test : (-p).comp q = -p.comp q := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "sub_comp": {
+      "proof": "@[simp]\ntheorem sub_comp_test : (p - q).comp r = p.comp r - q.comp r := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "intCast_comp": {
+      "proof": "@[simp]\ntheorem intCast_comp_test (i : Int) : comp (i : R[X]) p = i := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval₂_at_intCast": {
+      "proof": "@[simp]\ntheorem eval₂_at_intCast_test {S : Type*} [Ring S] (f : R →+* S) (n : Int) :\n    p.eval₂ f n = f (p.eval n) := by aesop",
+      "method": "NAIVE",
+      "run_id": "run_0001_20251212_010039",
+      "timestamp": "2025-12-12 01:09:19",
+      "signature": ""
+    },
+    "eval₂_eq_zero_of_dvd_of_eval₂_eq_zero": {
+      "proof": "theorem eval₂_eq_zero_of_dvd_of_eval₂_eq_zero_test (h : p ∣ q) (h0 : eval₂ f x p = 0) :\n    eval₂ f x q = 0 :=\n  by aesop (add norm simp [eval₂_dvd, zero_dvd_iff, dvd_def])",
+      "method": "LLM",
+      "run_id": "run_0002_20251212_011836",
+      "timestamp": "2025-12-12 01:23:30",
+      "signature": ""
+    },
+    "map_dvd": {
+      "proof": "theorem map_dvd_test (f : R →+* S) {x y : R[X]} : x ∣ y → x.map f ∣ y.map f :=\n  by aesop (add norm simp [mapRingHom, map_C, map_X, map_monomial, map_dvd])",
+      "method": "LLM",
+      "run_id": "run_0002_20251212_011836",
+      "timestamp": "2025-12-12 01:23:30",
+      "signature": ""
+    }
+  }
+}

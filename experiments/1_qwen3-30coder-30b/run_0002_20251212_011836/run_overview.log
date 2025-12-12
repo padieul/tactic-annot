@@ -1,0 +1,147 @@
+================================================================================
+AESOP PROOF RUN OVERVIEW: run_0002_20251212_011836
+================================================================================
+Generated: 2025-12-12 01:23:30
+Source file: data/full_defs_new.lean
+
+CONFIGURATION:
+--------------------------------------------------------------------------------
+  model: Qwen/Qwen3-Coder-30B-A3B-Instruct
+  temperature: 0.7
+  max_tokens: 4000
+  n_versions: 5
+  max_retries: 4
+  retry_temp_decay: 0.0
+
+OVERALL STATISTICS:
+--------------------------------------------------------------------------------
+Total theorems in source: 124
+Theorems skipped (already solved): 95
+Theorems attempted in this run: 27
+Original proof validation success: 0
+Original proof validation failed: 0
+
+SKIPPED THEOREMS (already solved in previous runs):
+--------------------------------------------------------------------------------
+  1. eval₂_neg
+  2. eval₂_at_ofNat
+  3. eval_pow
+  4. eval₂_mul_eq_zero_of_left
+  5. eval₂_ofNat
+  6. comp_one
+  7. map_X
+  8. eval_X_pow
+  9. coe_eval₂RingHom
+  10. eval₂_sub
+  11. eval_mul
+  12. eval₂_eq_sum
+  13. eval_natCast_mul
+  14. eval_eq_sum
+  15. C_mul_comp
+  16. not_isRoot_C
+  17. root_mul
+  18. eval_comp
+  19. root_mul_left_of_isRoot
+  20. X_comp
+  21. mapRingHom_comp_C
+  22. map_monomial
+  23. natCast_comp
+  24. eval_map
+  25. eval₂_mul_eq_zero_of_right
+  26. comp_X
+  27. eval₂_X_pow
+  28. natCast_mul_comp
+  29. eval_sub
+  30. neg_comp
+  31. eval₂_zero
+  32. eval_monomial
+  33. coe_evalRingHom
+  34. eval_C
+  35. zero_comp
+  36. eval₂_eq_eval_map
+  37. add_comp
+  38. comp_C
+  39. mul_X_pow_comp
+  40. eval_add
+  41. eval₂_X_mul
+  42. eval_X
+  43. root_or_root_of_root_mul
+  44. eval_one
+  45. mul_X_comp
+  46. IsRoot
+  47. eval₂_at_intCast
+  48. eval_mul_X
+  49. eval₂_id
+  50. eval_listSum
+  51. ofNat_comp
+  52. eval₂_mul_X
+  53. X_pow_comp
+  54. intCast_comp
+  55. eval₂_natCast
+  56. eval₂_one
+  57. map_C
+  58. eval₂_congr
+  59. eval_geom_sum
+  60. eval_C_mul
+  61. eval_neg
+  62. mul_comp
+  63. one_comp
+  64. eval_natCast
+  65. eval₂_add
+  66. eval₂_list_prod
+  67. coe_compRingHom
+  68. eval₂_monomial
+  69. sub_comp
+  70. eval₂_mul
+  71. eval_list_prod
+  72. eval₂_C
+  73. pow_comp
+  74. root_X_sub_C
+  75. comp_eq_sum_left
+  76. isRoot_prod
+  77. comp_zero
+  78. eval₂_at_one
+  79. coe_compRingHom_apply
+  80. isRoot_comp
+  81. eval₂_pow
+  82. eval_zero
+  83. eval₂_list_sum
+  84. coe_mapRingHom
+  85. eval_ofNat
+  86. monomial_comp
+  87. C_comp
+  88. eval₂_X
+  89. eval_intCast
+  90. eval₂_at_apply
+  91. eval₂_at_natCast
+  92. eval_mul_X_pow
+  93. eval_multisetSum
+  94. eval₂_ofFinsupp
+  95. root_mul_right_of_isRoot
+
+AESOP SUCCESS BREAKDOWN:
+--------------------------------------------------------------------------------
+Total aesop successes: 2
+  - Naive aesop (no LLM): 0
+  - LLM-assisted aesop: 2
+
+AESOP FAILURE BREAKDOWN:
+--------------------------------------------------------------------------------
+Total failures: 25
+
+Failure Classification:
+  - Syntax errors (FIXABLE): 4 (16.0%)
+  - Partial progress (NEEDS MORE HINTS): 12 (48.0%)
+  - Unknown: 9 (36.0%)
+
+SUCCESS RATE:
+--------------------------------------------------------------------------------
+2/27 theorems proven (7.4% success rate)
+
+REMAINING WORK:
+--------------------------------------------------------------------------------
+Theorems still to solve: 25
+  - Potentially fixable with better prompts/hints: 16
+  - May need different approach (induction, etc.): 0
+
+================================================================================

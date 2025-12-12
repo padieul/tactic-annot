@@ -15,16 +15,18 @@ class RunLogger:
         
         Args:
             base_log_dir: Base directory for all logs
-            run_name: Optional custom name for this run. If None, uses timestamp.
+            run_name: Optional custom name for this run. If None, uses timestamp with counter.
         """
         self.base_log_dir = Path(base_log_dir)
         
-        # Create run name from timestamp if not provided
+        # Create run name from timestamp with counter if not provided
         if run_name is None:
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-            run_name = f"run_{timestamp}"
+            counter = self._get_next_counter(timestamp)
+            run_name = f"run_{counter:04d}_{timestamp}"
         
         self.run_name = run_name
+        self.run_id = run_name  # Alias for compatibility
         self.run_dir = self.base_log_dir / run_name
         
         # Create directory structure
@@ -64,6 +66,33 @@ class RunLogger:
             },
             'aesop_variant_successes': {},
         }
+    
+    def _get_next_counter(self, timestamp: str) -> int:
+        """Get the next sequential counter for runs.
+        
+        Args:
+            timestamp: Current timestamp string
+            
+        Returns:
+            Next counter value
+        """
+        if not self.base_log_dir.exists():
+            return 1
+        
+        # Find all existing run directories
+        existing_runs = []
+        for item in self.base_log_dir.iterdir():
+            if item.is_dir() and item.name.startswith("run_"):
+                # Extract counter from directory name (format: run_NNNN_timestamp)
+                parts = item.name.split('_')
+                if len(parts) >= 2 and parts[1].isdigit():
+                    existing_runs.append(int(parts[1]))
+        
+        # Return next counter
+        if existing_runs:
+            return max(existing_runs) + 1
+        else:
+            return 1
     
     def set_source_file(self, filepath: str, total_theorems: int):
         """Set the source file being processed."""

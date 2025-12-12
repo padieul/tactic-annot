@@ -10,25 +10,30 @@ IMPORTANT:
 === COMMON SYNTAX ERRORS TO AVOID ===
 - If you got "phase not specified": use brackets [r1, r2] for multiple rules
 - If you got "duplicate rule": use `add norm [r1, r2]` not `add norm r1 r2`  
-- If you got "Unable to interpret": try removing namespace prefix (e.g., use `map_prod` not `List.map_prod`)
-- CORRECT: `aesop (add norm [lemma1, lemma2])` - brackets for multiple!
-- WRONG: `aesop (add norm lemma1, lemma2)` - this causes "phase not specified" error
+- If you got "Unable to interpret as norm rule": SPECIFY THE BUILDER!
+  * Use `aesop (add norm simp [lemma])` for simp lemmas
+  * Use `aesop (add safe (apply lemma))` for apply rules
+  * Use `aesop (add norm unfold [def])` for definitions
+- If you got "Unable to interpret": also try removing namespace prefix (e.g., use `map_prod` not `List.map_prod`)
+- CORRECT: `aesop (add norm simp [lemma1, lemma2])` - brackets AND builder!
+- WRONG: `aesop (add norm lemma1, lemma2)` - missing builder and wrong syntax
 
 Key strategies to try:
 1. `by aesop` - simplest case
-2. `aesop (add norm lemma)` - single lemma, no brackets needed
-3. `aesop (add norm [lemma1, lemma2])` - MULTIPLE lemmas NEED BRACKETS!
-4. `aesop (add safe lemma)` - for lemmas that should always apply
-5. `aesop (add norm unfold def_name)` - to unfold specific definitions
-6. `simp; aesop` or `simp_all; aesop` - two-stage approach
-7. `aesop (config := { enableSimp := true })` - enable simp in aesop
-8. **INDUCTION + AESOP** - if theorem involves List/Multiset/Finset with .sum/.prod:
-   - `induction var_name with | case1 => aesop | case2 => aesop (add norm ih)`
+2. **USE BUILDERS** - this is the #1 fix for "unable to interpret" errors:
+   - `aesop (add norm simp [lemma])` - for simp lemmas (MOST COMMON)
+   - `aesop (add safe (apply lemma))` - for apply rules
+   - `aesop (add norm unfold [def])` - for unfolding definitions
+3. `aesop (add norm simp [lemma1, lemma2])` - MULTIPLE lemmas with simp builder
+4. `simp; aesop` or `simp_all; aesop` - two-stage approach
+5. `aesop (config := { enableSimp := true })` - enable simp in aesop
+6. **INDUCTION + AESOP** - if theorem involves List/Multiset/Finset with .sum/.prod:
+   - `induction var_name with | case1 => aesop | case2 => aesop (add norm simp [ih])`
    - Or: `induction var_name <;> aesop` (concise when same proof works)
-9. Try DIFFERENT combinations of lemmas than previous attempts
-10. If previous attempts used too few lemmas, add more from the AVAILABLE LEMMAS list
-11. If previous attempts had wrong lemma names, check the original proof AND context carefully
-12. Avoid namespace prefixes like `Foo.bar` - just use `bar`
+7. Try DIFFERENT combinations of lemmas with EXPLICIT BUILDERS
+8. If previous attempts used too few lemmas, add more from AVAILABLE LEMMAS with `simp` builder
+9. If you got "unable to interpret", add the `simp` builder: `(add norm simp [lemma])`
+10. Avoid namespace prefixes like `Foo.bar` - just use `bar`
 
 RULES:
 - Return ONLY the converted Lean code

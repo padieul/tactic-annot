@@ -2,50 +2,44 @@
 # -*- coding: utf-8 -*-
 """Extract and validate theorems from a Lean file using Kimina."""
 
+import os
+import sys
+import warnings
+import logging
+
+# Suppress warnings and reduce logging noise
+warnings.filterwarnings('ignore')
+logging.getLogger('httpx').setLevel(logging.WARNING)
+logging.getLogger('openai').setLevel(logging.WARNING)
+logging.getLogger('httpcore').setLevel(logging.WARNING)
+
 from kimina_client import KiminaClient
 from aesop_agent.aesop_agent import AesopAgent
 from lean_cleaner import LeanCodeCleaner
 from theorem_extractor import TheoremExtractor
 from run_logger import RunLogger
+from theorem_registry import TheoremRegistry
 from validators.kimina_validator import KiminaValidator
 from strategies.aesop_naive_strategy import AesopNaiveStrategy
 from strategies.aesop_llm_strategy import AesopLLMStrategy
 from theorem_validator import TheoremValidator
 
 
+"""
+Qwen/Qwen3-Coder-30B-A3B-Instruct
+Qwen/Qwen3-30B-A3B-Thinking-2507
+Qwen/Qwen3-Coder-480B-A35B-Instruct
+Qwen/Qwen3-235B-A22B-Thinking-2507
+"""
+
 # Configuration
 AGENT_CONFIG = {
-    "model": "Qwen/Qwen3-Coder-480B-A35B-Instruct",
+    "model": "Qwen/Qwen3-Coder-30B-A3B-Instruct",
     "temperature": 0.7,
-    "max_tokens": 2048,
-    "n_versions": 3,
-    "max_retries": 2,
-    "retry_temp_decay": 0.6,
-}
-
-# Theorems to skip (already solved)
-SKIP_THEOREMS = {
-    # Naive aesop successes (82 theorems)
-    'eval₂_congr', 'eval₂_zero', 'eval₂_C', 'eval₂_X', 'eval₂_monomial', 'eval₂_X_pow',
-    'eval₂_add', 'eval₂_one', 'eval₂_natCast', 'eval₂_ofNat', 'eval₂_mul_X', 'eval₂_X_mul',
-    'eval₂_mul', 'eval₂_mul_eq_zero_of_left', 'eval₂_mul_eq_zero_of_right', 'coe_eval₂RingHom',
-    'eval₂_id', 'eval₂_at_apply', 'eval₂_at_one', 'eval₂_at_natCast', 'eval₂_at_ofNat',
-    'eval_C', 'eval_natCast', 'eval_ofNat', 'eval_X', 'eval_monomial', 'eval_zero',
-    'eval_add', 'eval_one', 'eval_C_mul', 'eval_natCast_mul', 'eval_mul_X', 'eval_mul_X_pow',
-    'IsRoot', 'not_isRoot_C', 'comp_X', 'X_comp', 'comp_C', 'C_comp', 'natCast_comp',
-    'ofNat_comp', 'comp_zero', 'zero_comp', 'comp_one', 'one_comp', 'add_comp',
-    'monomial_comp', 'mul_X_comp', 'X_pow_comp', 'mul_X_pow_comp', 'C_mul_comp',
-    'natCast_mul_comp', 'mul_comp', 'pow_comp', 'map_C', 'map_X', 'map_monomial',
-    'coe_mapRingHom', 'mapRingHom_comp_C', 'eval_mul', 'coe_evalRingHom', 'eval_pow',
-    'eval_X_pow', 'eval_comp', 'isRoot_comp', 'coe_compRingHom', 'coe_compRingHom_apply',
-    'root_mul_left_of_isRoot', 'root_mul_right_of_isRoot', 'eval_geom_sum', 'root_mul',
-    'root_or_root_of_root_mul', 'eval_intCast', 'eval₂_neg', 'eval₂_sub', 'eval_neg',
-    'eval_sub', 'neg_comp', 'sub_comp', 'intCast_comp', 'eval₂_at_intCast',
-    
-    # LLM-assisted aesop successes (13 theorems)
-    #'eval₂_eq_sum', 'eval₂_ofFinsupp', 'eval₂_mul_noncomm', 'eval₂_list_prod_noncomm',
-    #'eval_eq_sum', 'eval_listSum', 'eval_surjective', 'comp_eq_sum_left', 'comp_assoc',
-    #'eval₂_eq_eval_map', 'eval_map', 'isRoot_prod', 'root_X_sub_C',
+    "max_tokens": 4000,
+    "n_versions": 5,
+    "max_retries": 4,
+    "retry_temp_decay": 0.0,
 }
 
 PRINT_THEOREMS_NUM = 124
@@ -98,6 +92,12 @@ def main():
         print(f"  {i}. {thm['name']} -> {thm['renamed']} (line {thm['line_number']}){simp_marker}")
     print()
     
+    # Initialize theorem registry
+    print("Loading theorem registry...")
+    registry = TheoremRegistry(lean_file)
+    registry.print_summary()
+    print()
+    
     # Initialize Kimina client
     print("Connecting to Kimina server...")
     kimina_client = KiminaClient(
@@ -129,11 +129,24 @@ def main():
     
     # Validate theorems
     print(f"\nValidating {PROVE_THEOREMS_NUM} theorems...\n")
+    
+    # Get skip list from registry
+    skip_theorems = registry.get_skip_set()
+    
     aesop_stats = theorem_validator.validate_theorems(
         theorems,
-        skip_list=SKIP_THEOREMS,
+        skip_list=skip_theorems,
         num_to_prove=PROVE_THEOREMS_NUM
     )
+    
+    # Update registry with new successes
+    for success in aesop_stats['all_aesop_successes']:
+        registry.add_theorem(
+            theorem_name=success['name'],
+            proof=success['proof'],
+            method=success['success_type'],
+            run_id=logger.run_id
+        )
     
     # Write logs
     logger.update_stats(aesop_stats)
@@ -150,7 +163,7 @@ def main():
         )
     
     # Finalize
-    logger.write_run_overview(list(SKIP_THEOREMS), aesop_stats)
+    logger.write_run_overview(list(skip_theorems), aesop_stats)
     logger.finalize()
     
     print(f"\n{logger.get_run_summary()}")

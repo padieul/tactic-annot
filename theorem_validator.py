@@ -1,7 +1,6 @@
 """Theorem validator - orchestrates validation of theorems using multiple strategies."""
 
 from typing import Dict, List, Set
-from tqdm import tqdm
 from context.theorem_analyzer import TheoremAnalyzer
 from context.context_builder import ContextBuilder
 from validators.kimina_validator import KiminaValidator
@@ -33,7 +32,6 @@ class TheoremValidator:
         self.cleaned_content = cleaned_content
         self.analyzer = TheoremAnalyzer()
         self.context_builder = ContextBuilder()
-        self.pbar = None  # Will be set during validation
     
     def validate_theorems(
         self,
@@ -60,21 +58,14 @@ class TheoremValidator:
         
         theorems_to_prove = theorems[:num_to_prove]
         
-        # Process theorems with progress bar
-        with tqdm(total=len(theorems_to_prove), desc="Validating", unit="thm") as pbar:
-            self.pbar = pbar
-            for idx, theorem in enumerate(theorems_to_prove):
-                pbar.set_description(f"[{idx+1}/{len(theorems_to_prove)}] {theorem['name'][:30]}")
-                result = self._validate_single_theorem(theorem, idx, skip_list, stats)
-                
-                # Update progress bar with result
-                if result:
-                    pbar.set_postfix_str("✓")
-                else:
-                    pbar.set_postfix_str("✗")
-                
-                pbar.update(1)
-            self.pbar = None
+        # Process theorems with simple output
+        total = len(theorems_to_prove)
+        for idx, theorem in enumerate(theorems_to_prove):
+            result = self._validate_single_theorem(theorem, idx, skip_list, stats)
+            
+            # Print simple one-line status
+            status = "✓ SOLVED" if result else "✗ NOT SOLVED"
+            print(f"[{idx+1}/{total}] {theorem['name']}: {status}")
         
         return stats
     
@@ -122,9 +113,6 @@ class TheoremValidator:
         # Step 2: Try naive aesop variants
         stats['total_attempted'] += 1
         
-        if self.pbar:
-            self.pbar.set_postfix_str("trying aesop variants...")
-        
         naive_result = self.naive_strategy.try_prove(theorem, imports, stats)
         
         if naive_result:
@@ -152,9 +140,6 @@ class TheoremValidator:
             })
         
         # Step 3: Try LLM-assisted proof
-        if self.pbar:
-            self.pbar.set_postfix_str("trying LLM...")
-        
         llm_result = self.llm_strategy.try_prove(
             theorem,
             imports,

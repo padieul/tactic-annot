@@ -1,0 +1,32 @@
+{
+  "run_name": "run_0003_20251212_012541",
+  "start_time": "2025-12-12T01:25:41.410381",
+  "end_time": "2025-12-12T01:30:32.712126",
+  "source_file": "data/full_defs_new.lean",
+  "config": {
+    "model": "Qwen/Qwen3-Coder-30B-A3B-Instruct",
+    "temperature": 0.7,
+    "max_tokens": 4000,
+    "n_versions": 5,
+    "max_retries": 4,
+    "retry_temp_decay": 0.0
+  },
+  "statistics": {
+    "total_theorems": 124,
+    "skipped_theorems": 99,
+    "attempted_theorems": 25,
+    "original_validation_success": 0,
+    "original_validation_failed": 0,
+    "naive_aesop_success": 0,
+    "llm_aesop_success": 0,
+    "total_failures": 25,
+    "failure_classifications": {
+      "syntax_error": 7,
+      "no_progress": 0,
+      "partial_progress": 15,
+      "fundamental": 0,
+      "unknown": 3
+    },
+    "aesop_variant_successes": {}
+  }
+}

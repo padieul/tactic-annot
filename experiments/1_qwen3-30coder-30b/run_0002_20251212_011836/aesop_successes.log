@@ -1,0 +1,65 @@
+AESOP SUCCESSES - RUN: run_0002_20251212_011836
+Generated: 2025-12-12 01:23:30
+================================================================================
+
+Total successes in this run: 2
+
+================================================================================
+SUCCESS #1: eval₂_eq_zero_of_dvd_of_eval₂_eq_zero [LLM]
+================================================================================
+Line number: 245
+Has @[simp]: False
+Method: llm_assisted
+Context: commsemiring_s
+LLM Version: 3
+LLM Attempts: 2
+
+Theorem signature:
+--------------------------------------------------------------------------------
+theorem eval₂_eq_zero_of_dvd_of_eval₂_eq_zero (h : p ∣ q) (h0 : eval₂ f x p = 0) :
+    eval₂ f x q = 0
+--------------------------------------------------------------------------------
+
+Successful proof:
+--------------------------------------------------------------------------------
+theorem eval₂_eq_zero_of_dvd_of_eval₂_eq_zero_test (h : p ∣ q) (h0 : eval₂ f x p = 0) :
+    eval₂ f x q = 0 :=
+  by aesop (add norm simp [eval₂_dvd, zero_dvd_iff, dvd_def])
+--------------------------------------------------------------------------------
+
+Original proof (for reference):
+--------------------------------------------------------------------------------
+theorem eval₂_eq_zero_of_dvd_of_eval₂_eq_zero_test (h : p ∣ q) (h0 : eval₂ f x p = 0) :
+    eval₂ f x q = 0 :=
+  zero_dvd_iff.mp (h0 ▸ eval₂_dvd f x h)
+--------------------------------------------------------------------------------
+
+
+================================================================================
+SUCCESS #2: map_dvd [LLM]
+================================================================================
+Line number: 562
+Has @[simp]: False
+Method: llm_assisted
+Context: map_section
+LLM Version: 1
+LLM Attempts: 4
+
+Theorem signature:
+--------------------------------------------------------------------------------
+theorem map_dvd (f : R →+* S) {x y : R[X]} : x ∣ y → x.map f ∣ y.map f
+--------------------------------------------------------------------------------
+
+Successful proof:
+--------------------------------------------------------------------------------
+theorem map_dvd_test (f : R →+* S) {x y : R[X]} : x ∣ y → x.map f ∣ y.map f :=
+  by aesop (add norm simp [mapRingHom, map_C, map_X, map_monomial, map_dvd])
+--------------------------------------------------------------------------------
+
+Original proof (for reference):
+--------------------------------------------------------------------------------
+theorem map_dvd_test (f : R →+* S) {x y : R[X]} : x ∣ y → x.map f ∣ y.map f :=
+  _root_.map_dvd (mapRingHom f)
+--------------------------------------------------------------------------------
+
+
