@@ -1,0 +1,14 @@
+# Core dependencies
+openai>=1.0.0
+httpx>=0.24.0
+python-dotenv>=1.0.0
+
+# Lean validation
+kimina-client>=0.1.0
+
+# Data analysis and visualization (for experiments/stats.ipynb)
+pandas>=2.0.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+jupyter>=1.0.0
+ipykernel>=6.0.0
