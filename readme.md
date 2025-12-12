@@ -5,7 +5,7 @@ This is a prototype of a hybrid LLM-guided proof automation system with a meta-l
 [ItaLean2025](https://pitmonticone.github.io/ItaLean2025/). More specifically:
 
 - **Primary Function:** An agent that attempts to automatically prove theorems using Lean 4's aesop tactic with varying configurations
-- **Meta-Learning Goal:** Extract implicit proof knowledge (which lemmas/hints make proofs work) to generate @[aesop] annotations for Mathlib.
+- **Meta-Learning Goal:** Extract implicit proof knowledge (which lemmas/hints make proofs work) to generate @[aesop] annotations for Mathlib. (*not implemented yet*)
 
 ![](images/aesop_diagram.drawio.png)
 

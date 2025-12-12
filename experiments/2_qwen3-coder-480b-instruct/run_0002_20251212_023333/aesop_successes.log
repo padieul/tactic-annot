@@ -1,0 +1,68 @@
+AESOP SUCCESSES - RUN: run_0002_20251212_023333
+Generated: 2025-12-12 02:35:58
+================================================================================
+
+Total successes in this run: 2
+
+================================================================================
+SUCCESS #1: eval₂_pow [LLM]
+================================================================================
+Line number: 238
+Has @[simp]: False
+Method: llm_assisted
+Context: commsemiring_s
+LLM Version: 1
+LLM Attempts: 2
+
+Theorem signature:
+--------------------------------------------------------------------------------
+theorem eval₂_pow (n : Nat) : (p ^ n).eval₂ f x = p.eval₂ f x ^ n
+--------------------------------------------------------------------------------
+
+Successful proof:
+--------------------------------------------------------------------------------
+theorem eval₂_pow_test (n : Nat) : (p ^ n).eval₂ f x = p.eval₂ f x ^ n := by
+  induction n with
+  | zero => simp [pow_zero, eval₂_one]
+  | succ n ih => 
+      simp [pow_succ, eval₂_mul, ih]
+--------------------------------------------------------------------------------
+
+Original proof (for reference):
+--------------------------------------------------------------------------------
+theorem eval₂_pow_test (n : Nat) : (p ^ n).eval₂ f x = p.eval₂ f x ^ n :=
+  (eval₂RingHom _ _).map_pow _ _
+--------------------------------------------------------------------------------
+
+
+================================================================================
+SUCCESS #2: eval₂_eq_zero_of_dvd_of_eval₂_eq_zero [LLM]
+================================================================================
+Line number: 245
+Has @[simp]: False
+Method: llm_assisted
+Context: commsemiring_s
+LLM Version: 1
+LLM Attempts: 4
+
+Theorem signature:
+--------------------------------------------------------------------------------
+theorem eval₂_eq_zero_of_dvd_of_eval₂_eq_zero (h : p ∣ q) (h0 : eval₂ f x p = 0) :
+    eval₂ f x q = 0
+--------------------------------------------------------------------------------
+
+Successful proof:
+--------------------------------------------------------------------------------
+theorem eval₂_eq_zero_of_dvd_of_eval₂_eq_zero_test (h : p ∣ q) (h0 : eval₂ f x p = 0) :
+    eval₂ f x q = 0 := by
+  aesop (add norm simp [eval₂_dvd, Dvd.dvd])
+--------------------------------------------------------------------------------
+
+Original proof (for reference):
+--------------------------------------------------------------------------------
+theorem eval₂_eq_zero_of_dvd_of_eval₂_eq_zero_test (h : p ∣ q) (h0 : eval₂ f x p = 0) :
+    eval₂ f x q = 0 :=
+  zero_dvd_iff.mp (h0 ▸ eval₂_dvd f x h)
+--------------------------------------------------------------------------------
+
+

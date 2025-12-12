@@ -1,0 +1,192 @@
+nohup: ignoring input
+=== Aesop Agent Run Started: 2025-12-12 03:17:40.688354 ===
+Process ID: 562853
+Working directory: /home/pdietze/Sources/tactic-annot
+
+Reading data/full_defs_new.lean...
+Loaded 24752 characters
+Cleaning corrupted Unicode...
+Cleaned (eval₂ count: 227, remaining '?': 4)
+
+Extracting theorems...
+Found 124 theorems
+
+First 124 theorems:
+  1. eval₂_eq_sum -> eval₂_eq_sum_test (line 74)
+  2. eval₂_congr -> eval₂_congr_test (line 80)
+  3. eval₂_zero -> eval₂_zero_test (line 86) [@simp]
+  4. eval₂_C -> eval₂_C_test (line 89) [@simp]
+  5. eval₂_X -> eval₂_X_test (line 92) [@simp]
+  6. eval₂_monomial -> eval₂_monomial_test (line 95) [@simp]
+  7. eval₂_X_pow -> eval₂_X_pow_test (line 99) [@simp]
+  8. eval₂_add -> eval₂_add_test (line 105) [@simp]
+  9. eval₂_one -> eval₂_one_test (line 110) [@simp]
+  10. eval₂_natCast -> eval₂_natCast_test (line 121) [@simp]
+  11. eval₂_ofNat -> eval₂_ofNat_test (line 127) [@simp]
+  12. eval₂_sum -> eval₂_sum_test (line 133)
+  13. eval₂_list_sum -> eval₂_list_sum_test (line 143)
+  14. eval₂_multiset_sum -> eval₂_multiset_sum_test (line 146)
+  15. eval₂_finset_sum -> eval₂_finset_sum_test (line 150)
+  16. eval₂_ofFinsupp -> eval₂_ofFinsupp_test (line 154)
+  17. eval₂_mul_noncomm -> eval₂_mul_noncomm_test (line 159)
+  18. eval₂_mul_X -> eval₂_mul_X_test (line 167) [@simp]
+  19. eval₂_X_mul -> eval₂_X_mul_test (line 174) [@simp]
+  20. eval₂_mul_C -> eval₂_mul_C_test (line 176)
+  21. eval₂_list_prod_noncomm -> eval₂_list_prod_noncomm_test (line 183)
+  22. eval₂_mul -> eval₂_mul_test (line 217) [@simp]
+  23. eval₂_mul_eq_zero_of_left -> eval₂_mul_eq_zero_of_left_test (line 220)
+  24. eval₂_mul_eq_zero_of_right -> eval₂_mul_eq_zero_of_right_test (line 224)
+  25. coe_eval₂RingHom -> coe_eval₂RingHom_test (line 235) [@simp]
+  26. eval₂_pow -> eval₂_pow_test (line 238)
+  27. eval₂_dvd -> eval₂_dvd_test (line 242)
+  28. eval₂_eq_zero_of_dvd_of_eval₂_eq_zero -> eval₂_eq_zero_of_dvd_of_eval₂_eq_zero_test (line 245)
+  29. eval₂_list_prod -> eval₂_list_prod_test (line 249)
+  30. eval₂_id -> eval₂_id_test (line 265) [@simp]
+  31. eval_eq_sum -> eval_eq_sum_test (line 267)
+  32. eval₂_at_apply -> eval₂_at_apply_test (line 272) [@simp]
+  33. eval₂_at_one -> eval₂_at_one_test (line 278) [@simp]
+  34. eval₂_at_natCast -> eval₂_at_natCast_test (line 283) [@simp]
+  35. eval₂_at_ofNat -> eval₂_at_ofNat_test (line 289) [@simp]
+  36. eval_C -> eval_C_test (line 294) [@simp]
+  37. eval_natCast -> eval_natCast_test (line 298) [@simp]
+  38. eval_ofNat -> eval_ofNat_test (line 301) [@simp]
+  39. eval_X -> eval_X_test (line 306) [@simp]
+  40. eval_monomial -> eval_monomial_test (line 310) [@simp]
+  41. eval_zero -> eval_zero_test (line 314) [@simp]
+  42. eval_add -> eval_add_test (line 318) [@simp]
+  43. eval_one -> eval_one_test (line 322) [@simp]
+  44. eval_C_mul -> eval_C_mul_test (line 326) [@simp]
+  45. eval_natCast_mul -> eval_natCast_mul_test (line 332) [@simp]
+  46. eval_mul_X -> eval_mul_X_test (line 336) [@simp]
+  47. eval_mul_X_pow -> eval_mul_X_pow_test (line 339) [@simp]
+  48. eval_listSum -> eval_listSum_test (line 345)
+  49. eval_multisetSum -> eval_multisetSum_test (line 349)
+  50. eval_sum -> eval_sum_test (line 352)
+  51. eval_finset_sum -> eval_finset_sum_test (line 356)
+  52. IsRoot -> IsRoot_test (line 368) [@simp]
+  53. IsRoot -> IsRoot_test (line 371)
+  54. IsRoot -> IsRoot_test (line 374)
+  55. not_isRoot_C -> not_isRoot_C_test (line 378)
+  56. eval_surjective -> eval_surjective_test (line 380)
+  57. comp_eq_sum_left -> comp_eq_sum_left_test (line 390)
+  58. comp_X -> comp_X_test (line 393) [@simp]
+  59. X_comp -> X_comp_test (line 398) [@simp]
+  60. comp_C -> comp_C_test (line 402) [@simp]
+  61. C_comp -> C_comp_test (line 405) [@simp]
+  62. natCast_comp -> natCast_comp_test (line 409) [@simp]
+  63. ofNat_comp -> ofNat_comp_test (line 412) [@simp]
+  64. comp_zero -> comp_zero_test (line 416) [@simp]
+  65. zero_comp -> zero_comp_test (line 419) [@simp]
+  66. comp_one -> comp_one_test (line 422) [@simp]
+  67. one_comp -> one_comp_test (line 425) [@simp]
+  68. add_comp -> add_comp_test (line 428) [@simp]
+  69. monomial_comp -> monomial_comp_test (line 432) [@simp]
+  70. mul_X_comp -> mul_X_comp_test (line 436) [@simp]
+  71. X_pow_comp -> X_pow_comp_test (line 442) [@simp]
+  72. mul_X_pow_comp -> mul_X_pow_comp_test (line 448) [@simp]
+  73. C_mul_comp -> C_mul_comp_test (line 454) [@simp]
+  74. natCast_mul_comp -> natCast_mul_comp_test (line 460) [@simp]
+  75. mul_X_add_natCast_comp -> mul_X_add_natCast_comp_test (line 463)
+  76. mul_comp -> mul_comp_test (line 468) [@simp]
+  77. mul_comp_neg_X -> mul_comp_neg_X_test (line 473) [@simp]
+  78. pow_comp -> pow_comp_test (line 478) [@simp]
+  79. comp_assoc -> comp_assoc_test (line 483)
+  80. map_C -> map_C_test (line 504) [@simp]
+  81. map_X -> map_X_test (line 508) [@simp]
+  82. map_monomial -> map_monomial_test (line 512) [@simp]
+  83. coe_mapRingHom -> coe_mapRingHom_test (line 548) [@simp]
+  84. map_dvd -> map_dvd_test (line 562)
+  85. associated_map_map -> associated_map_map_test (line 565)
+  86. mapRingHom_comp_C -> mapRingHom_comp_C_test (line 568)
+  87. eval₂_eq_eval_map -> eval₂_eq_eval_map_test (line 571)
+  88. eval_map -> eval_map_test (line 583)
+  89. map_comp -> map_comp_test (line 593)
+  90. eval_mul -> eval_mul_test (line 615) [@simp]
+  91. coe_evalRingHom -> coe_evalRingHom_test (line 623) [@simp]
+  92. eval_pow -> eval_pow_test (line 627) [@simp]
+  93. eval_X_pow -> eval_X_pow_test (line 630)
+  94. eval_comp -> eval_comp_test (line 634) [@simp]
+  95. isRoot_comp -> isRoot_comp_test (line 639)
+  96. coe_compRingHom -> coe_compRingHom_test (line 647) [@simp]
+  97. coe_compRingHom_apply -> coe_compRingHom_apply_test (line 650)
+  98. root_mul_left_of_isRoot -> root_mul_left_of_isRoot_test (line 653)
+  99. root_mul_right_of_isRoot -> root_mul_right_of_isRoot_test (line 656)
+  100. eval₂_multiset_prod -> eval₂_multiset_prod_test (line 659)
+  101. eval₂_finset_prod -> eval₂_finset_prod_test (line 663)
+  102. eval_list_prod -> eval_list_prod_test (line 669)
+  103. eval_multiset_prod -> eval_multiset_prod_test (line 674)
+  104. eval_prod -> eval_prod_test (line 679)
+  105. list_prod_comp -> list_prod_comp_test (line 683)
+  106. multiset_prod_comp -> multiset_prod_comp_test (line 687)
+  107. prod_comp -> prod_comp_test (line 691)
+  108. isRoot_prod -> isRoot_prod_test (line 695)
+  109. eval_dvd -> eval_dvd_test (line 700)
+  110. eval_eq_zero_of_dvd_of_eval_eq_zero -> eval_eq_zero_of_dvd_of_eval_eq_zero_test (line 703)
+  111. eval_geom_sum -> eval_geom_sum_test (line 707) [@simp]
+  112. root_mul -> root_mul_test (line 712)
+  113. root_or_root_of_root_mul -> root_or_root_of_root_mul_test (line 715)
+  114. eval_intCast -> eval_intCast_test (line 753) [@simp]
+  115. eval₂_neg -> eval₂_neg_test (line 757) [@simp]
+  116. eval₂_sub -> eval₂_sub_test (line 761) [@simp]
+  117. eval_neg -> eval_neg_test (line 766) [@simp]
+  118. eval_sub -> eval_sub_test (line 770) [@simp]
+  119. root_X_sub_C -> root_X_sub_C_test (line 773)
+  120. neg_comp -> neg_comp_test (line 777) [@simp]
+  121. sub_comp -> sub_comp_test (line 781) [@simp]
+  122. intCast_comp -> intCast_comp_test (line 785) [@simp]
+  123. eval₂_at_intCast -> eval₂_at_intCast_test (line 788) [@simp]
+  124. mul_X_sub_intCast_comp -> mul_X_sub_intCast_comp_test (line 793)
+
+Loading theorem registry...
+
+============================================================
+THEOREM REGISTRY: full_defs_new_aesop_registry.json
+============================================================
+Lean file: data/full_defs_new.lean
+Total theorems: 105
+  - Naive aesop: 0
+  - LLM-assisted: 0
+Last updated: 2025-12-12 02:35:58
+============================================================
+
+Connecting to Kimina server...
+Connected to Kimina
+Initializing Aesop agent...
+Connected to Nebius API (Qwen/Qwen3-235B-A22B-Thinking-2507)
+
+Validating 124 theorems...
+
+[1/124] eval₂_eq_sum: ✓ SOLVED
+[2/124] eval₂_congr: ✓ SOLVED
+[3/124] eval₂_zero: ✓ SOLVED
+[4/124] eval₂_C: ✓ SOLVED
+[5/124] eval₂_X: ✓ SOLVED
+[6/124] eval₂_monomial: ✓ SOLVED
+[7/124] eval₂_X_pow: ✓ SOLVED
+[8/124] eval₂_add: ✓ SOLVED
+[9/124] eval₂_one: ✓ SOLVED
+[10/124] eval₂_natCast: ✓ SOLVED
+[11/124] eval₂_ofNat: ✓ SOLVED
+Batches:   0%|          | 0/1 [elapsed: 00:00, remaining: ?]Batches: 100%|██████████| 1/1 [elapsed: 00:00, remaining: 00:00]Batches: 100%|██████████| 1/1 [elapsed: 00:00, remaining: 00:00]
+Batches:   0%|          | 0/1 [elapsed: 00:00, remaining: ?]Batches: 100%|██████████| 1/1 [elapsed: 00:00, remaining: 00:00]Batches: 100%|██████████| 1/1 [elapsed: 00:00, remaining: 00:00]
+Batches:   0%|          | 0/1 [elapsed: 00:00, remaining: ?]Batches: 100%|██████████| 1/1 [elapsed: 00:00, remaining: 00:00]Batches: 100%|██████████| 1/1 [elapsed: 00:00, remaining: 00:00]
+[12/124] eval₂_sum: ✗ NOT SOLVED
+[13/124] eval₂_list_sum: ✓ SOLVED
+Batches:   0%|          | 0/1 [elapsed: 00:00, remaining: ?]Batches: 100%|██████████| 1/1 [elapsed: 00:00, remaining: 00:00]Batches: 100%|██████████| 1/1 [elapsed: 00:00, remaining: 00:00]
+Batches:   0%|          | 0/1 [elapsed: 00:00, remaining: ?]Batches: 100%|██████████| 1/1 [elapsed: 00:00, remaining: 00:00]Batches: 100%|██████████| 1/1 [elapsed: 00:00, remaining: 00:00]
+Batches:   0%|          | 0/1 [elapsed: 00:00, remaining: ?]Batches: 100%|██████████| 1/1 [elapsed: 00:00, remaining: 00:00]Batches: 100%|██████████| 1/1 [elapsed: 00:00, remaining: 00:00]
+[14/124] eval₂_multiset_sum: ✗ NOT SOLVED
+Batches:   0%|          | 0/1 [elapsed: 00:00, remaining: ?]Batches: 100%|██████████| 1/1 [elapsed: 00:00, remaining: 00:00]Batches: 100%|██████████| 1/1 [elapsed: 00:00, remaining: 00:00]
+Batches:   0%|          | 0/1 [elapsed: 00:00, remaining: ?]Batches: 100%|██████████| 1/1 [elapsed: 00:00, remaining: 00:00]Batches: 100%|██████████| 1/1 [elapsed: 00:00, remaining: 00:00]
+Batches:   0%|          | 0/1 [elapsed: 00:00, remaining: ?]Batches: 100%|██████████| 1/1 [elapsed: 00:00, remaining: 00:00]Batches: 100%|██████████| 1/1 [elapsed: 00:00, remaining: 00:00]
+[15/124] eval₂_finset_sum: ✗ NOT SOLVED
+[16/124] eval₂_ofFinsupp: ✓ SOLVED
+Batches:   0%|          | 0/1 [elapsed: 00:00, remaining: ?]Batches: 100%|██████████| 1/1 [elapsed: 00:00, remaining: 00:00]Batches: 100%|██████████| 1/1 [elapsed: 00:00, remaining: 00:00]
+Batches:   0%|          | 0/1 [elapsed: 00:00, remaining: ?]Batches: 100%|██████████| 1/1 [elapsed: 00:00, remaining: 00:00]Batches: 100%|██████████| 1/1 [elapsed: 00:00, remaining: 00:00]
+Batches:   0%|          | 0/1 [elapsed: 00:00, remaining: ?]Batches: 100%|██████████| 1/1 [elapsed: 00:00, remaining: 00:00]Batches: 100%|██████████| 1/1 [elapsed: 00:00, remaining: 00:00]
+[17/124] eval₂_mul_noncomm: ✗ NOT SOLVED
+[18/124] eval₂_mul_X: ✓ SOLVED
+[19/124] eval₂_X_mul: ✓ SOLVED
+Batches:   0%|          | 0/1 [elapsed: 00:00, remaining: ?]Batches: 100%|██████████| 1/1 [elapsed: 00:00, remaining: 00:00]Batches: 100%|██████████| 1/1 [elapsed: 00:00, remaining: 00:00]
+Batches:   0%|          | 0/1 [elapsed: 00:00, remaining: ?]Batches: 100%|██████████| 1/1 [elapsed: 00:00, remaining: 00:00]Batches: 100%|██████████| 1/1 [elapsed: 00:00, remaining: 00:00]
+Batches:   0%|          | 0/1 [elapsed: 00:00, remaining: ?]Batches: 100%|██████████| 1/1 [elapsed: 00:00, remaining: 00:00]Batches: 100%|██████████| 1/1 [elapsed: 00:00, remaining: 00:00]

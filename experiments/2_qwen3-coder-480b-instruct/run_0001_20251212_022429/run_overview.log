@@ -1,0 +1,51 @@
+================================================================================
+AESOP PROOF RUN OVERVIEW: run_0001_20251212_022429
+================================================================================
+Generated: 2025-12-12 02:29:39
+Source file: data/full_defs_new.lean
+
+CONFIGURATION:
+--------------------------------------------------------------------------------
+  model: Qwen/Qwen3-Coder-480B-A35B-Instruct
+  temperature: 0.7
+  max_tokens: 6000
+  n_versions: 5
+  max_retries: 4
+  retry_temp_decay: 0.0
+
+OVERALL STATISTICS:
+--------------------------------------------------------------------------------
+Total theorems in source: 124
+Theorems skipped (already solved): 0
+Theorems attempted in this run: 124
+Original proof validation success: 0
+Original proof validation failed: 0
+
+AESOP SUCCESS BREAKDOWN:
+--------------------------------------------------------------------------------
+Total aesop successes: 104
+  - Naive aesop (no LLM): 82
+    Breakdown by variant:
+      • naive: 82
+  - LLM-assisted aesop: 22
+
+AESOP FAILURE BREAKDOWN:
+--------------------------------------------------------------------------------
+Total failures: 20
+
+Failure Classification:
+  - Syntax errors (FIXABLE): 8 (40.0%)
+  - Partial progress (NEEDS MORE HINTS): 4 (20.0%)
+  - Unknown: 8 (40.0%)
+
+SUCCESS RATE:
+--------------------------------------------------------------------------------
+104/124 theorems proven (83.9% success rate)
+
+REMAINING WORK:
+--------------------------------------------------------------------------------
+Theorems still to solve: 20
+  - Potentially fixable with better prompts/hints: 12
+  - May need different approach (induction, etc.): 0
+
+================================================================================

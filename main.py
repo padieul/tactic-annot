@@ -7,6 +7,10 @@ import sys
 import warnings
 import logging
 
+# Load environment variables from .env file
+from dotenv import load_dotenv
+load_dotenv()  # This will load .env from current directory
+
 # Suppress warnings and reduce logging noise
 warnings.filterwarnings('ignore')
 logging.getLogger('httpx').setLevel(logging.WARNING)
@@ -34,11 +38,11 @@ Qwen/Qwen3-235B-A22B-Thinking-2507
 
 # Configuration
 AGENT_CONFIG = {
-    "model": "Qwen/Qwen3-Coder-30B-A3B-Instruct",
+    "model": "Qwen/Qwen3-235B-A22B-Thinking-2507",
     "temperature": 0.7,
-    "max_tokens": 4000,
-    "n_versions": 5,
-    "max_retries": 4,
+    "max_tokens": 6000,
+    "n_versions": 1,
+    "max_retries": 1,
     "retry_temp_decay": 0.0,
 }
 
@@ -48,6 +52,12 @@ PROVE_THEOREMS_NUM = 124
 
 def main():
     """Main entry point."""
+    # Print startup info for tmux/screen sessions
+    import datetime
+    print(f"=== Aesop Agent Run Started: {datetime.datetime.now()} ===")
+    print(f"Process ID: {os.getpid()}")
+    print(f"Working directory: {os.getcwd()}\n")
+    
     # Initialize logger
     logger = RunLogger()
     
